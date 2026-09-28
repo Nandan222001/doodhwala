@@ -6,6 +6,21 @@
 <title>DoodhWala — कालचे दूध आजच ठरवा | Milk Subscription for Milkmen & Societies</title>
 <meta name="description" content="DoodhWala — दूधवाल्यांसाठी सदस्यता आणि रोजचा ऑर्डर. Residents confirm tomorrow's milk every evening; milkmen get exact society-wise demand every morning.">
 <style>
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mukta-400-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mukta-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mukta-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/mukta-600-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/mukta-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/mukta-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/mukta-700-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/mukta-700-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/mukta-700-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/mukta-800-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/mukta-800-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Mukta';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/mukta-800-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Rozha One';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rozhaone-400-devanagari.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+  @font-face{font-family:'Rozha One';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rozhaone-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+  @font-face{font-family:'Rozha One';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rozhaone-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
   :root{
     --ink:#16302A;
     --ink-soft:#4E655D;
@@ -20,21 +35,21 @@
     --red:#D64545;
     --shadow:0 10px 30px rgba(22,48,42,.10);
     --shadow-sm:0 4px 14px rgba(22,48,42,.08);
-    --radius:18px;
+    --radius:16px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    font-family:"Noto Sans Devanagari","Nirmala UI","Mukta","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-family:"Mukta","Noto Sans Devanagari","Nirmala UI","Segoe UI",system-ui,sans-serif;
     color:var(--ink);
     background:var(--cream);
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
   img,svg{display:block}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-  .en{display:block;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink-soft);font-weight:400}
+  .en{display:block;font-family:inherit;color:var(--ink-soft);font-weight:400}
   .en.muted{color:#7C8E87}
   /* English mode: hide secondary English lines, primary text swaps via JS */
   body.lang-en .en{display:none !important}
@@ -49,24 +64,27 @@
   .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;max-width:1120px;margin:0 auto}
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:.2px}
   .logo .mark{width:38px;height:38px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:var(--shadow-sm);flex:0 0 auto}
-  .logo small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-soft);letter-spacing:.4px;text-transform:uppercase;font-family:"Segoe UI",system-ui,sans-serif}
+  .logo small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-soft);letter-spacing:.4px;text-transform:uppercase;font-family:inherit}
   nav.links{display:flex;align-items:center;gap:24px}
   nav.links a{font-size:.95rem;font-weight:600;color:var(--ink)}
   nav.links a:hover{color:var(--green)}
   .nav-actions{display:flex;align-items:center;gap:10px}
   .lang-btn{
-    display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:12px;
     border:2px solid var(--line);background:#fff;font-weight:800;font-size:.9rem;cursor:pointer;
     font-family:inherit;color:var(--ink);transition:.15s;
   }
   .lang-btn:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:13px 24px;border-radius:999px;font-weight:700;font-size:1rem;
-    border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
-    font-family:inherit;
+    padding:13px 26px;border-radius:12px;font-weight:700;font-size:1rem;letter-spacing:.01em;
+    border:none;cursor:pointer;font-family:inherit;
+    transition:transform .16s cubic-bezier(.2,.8,.3,1),box-shadow .16s ease,background .16s ease,border-color .16s ease,color .16s ease;
   }
-  .btn:hover{transform:translateY(-2px)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0) scale(.975)}
+  a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid rgba(15,122,74,.55);outline-offset:2px}
+  ::selection{background:var(--green);color:#fff}
   .btn-primary{background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(15,122,74,.35)}
   .btn-primary:hover{background:var(--green-dark)}
   .btn-ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}
@@ -115,7 +133,7 @@
     font-weight:700;font-size:.85rem;padding:8px 16px;border-radius:999px;margin-bottom:22px;
     border:1px solid #CBE8D8;
   }
-  h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.22;font-weight:800;letter-spacing:-.5px}
+  h1{font-family:"Rozha One","Mukta",Georgia,serif;font-size:clamp(2.25rem,4.9vw,3.6rem);line-height:1.26;font-weight:400;letter-spacing:0}
   h1 .hl{color:var(--green);position:relative;white-space:nowrap}
   h1 .en-line{display:block;font-size:clamp(1.05rem,2vw,1.35rem);font-weight:600;color:var(--ink-soft);margin-top:12px;letter-spacing:0}
   .hero p.lead{font-size:1.1rem;color:var(--ink-soft);margin:22px 0 10px;max-width:540px}
@@ -134,10 +152,11 @@
     display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem;
     padding-bottom:12px;border-bottom:1px dashed var(--line);margin-bottom:6px;
   }
+  .stat-head > svg{width:17px;height:17px;stroke:var(--ink);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
   .stat-head .live{
     margin-left:auto;font-size:.7rem;font-weight:800;letter-spacing:1px;color:var(--green);
     background:var(--green-tint);padding:3px 10px;border-radius:999px;text-transform:uppercase;
-    font-family:"Segoe UI",sans-serif;display:inline-flex;align-items:center;gap:6px;
+    font-family:inherit;display:inline-flex;align-items:center;gap:6px;
   }
   .stat-head .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.6s infinite}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
@@ -161,7 +180,7 @@
   .milk-big small{font-size:1rem;color:var(--ink-soft);font-weight:600}
   .opt-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
   .opt{
-    padding:12px 8px;border-radius:14px;border:2px solid var(--line);background:#fff;
+    padding:12px 8px;border-radius:12px;border:2px solid var(--line);background:#fff;
     font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit;color:var(--ink);
     transition:.15s;
   }
@@ -179,9 +198,9 @@
   .mini-dash .mini-badge{
     display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:800;letter-spacing:1.2px;
     text-transform:uppercase;color:#8CE0B8;background:rgba(140,224,184,.12);
-    padding:4px 12px;border-radius:999px;margin-bottom:14px;font-family:"Segoe UI",sans-serif;
+    padding:4px 12px;border-radius:999px;margin-bottom:14px;font-family:inherit;
   }
-  .mini-dash h4{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:#9DBBAE;margin-bottom:12px;font-family:"Segoe UI",sans-serif}
+  .mini-dash h4{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:#9DBBAE;margin-bottom:12px;font-family:inherit}
   .mini-row{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
   .mini-row:last-child{border:none;font-weight:800;font-size:1.1rem;color:#8CE0B8;padding-top:10px}
 
@@ -192,15 +211,15 @@
     background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;
     font-size:1.65rem;display:grid;place-items:center;position:relative;font-family:inherit;
     box-shadow:0 12px 32px rgba(15,122,74,.45);
-    transition:transform .2s ease, box-shadow .2s ease;animation:bob 2.6s ease-in-out infinite;
+    transition:transform .2s ease, box-shadow .2s ease;animation:bob 3.4s ease-in-out infinite;
   }
   .notif-bubble:hover{transform:scale(1.08)}
   .notif-bubble::before{
     content:"";position:absolute;inset:-5px;border-radius:50%;
-    border:2px solid rgba(15,122,74,.45);animation:ring 2.6s ease-out infinite;
+    border:2px solid rgba(15,122,74,.4);animation:ring 3.4s ease-out infinite;
   }
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @keyframes ring{0%{transform:scale(.92);opacity:.9}70%{transform:scale(1.28);opacity:0}100%{opacity:0}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  @keyframes ring{0%{transform:scale(.94);opacity:.55}70%{transform:scale(1.2);opacity:0}100%{opacity:0}}
   .notif-widget.open .notif-bubble{animation:none}
   .notif-label{
     background:#fff;border:1px solid var(--line);border-radius:999px;
@@ -227,12 +246,14 @@
   .notif-close:hover{background:var(--red);color:#fff}
 
   /* ---------- SECTION BASE ---------- */
-  section{padding:74px 0}
+  section{padding:84px 0}
+  section[id]{scroll-margin-top:96px}
   .sec-tag{
-    display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-    color:var(--saffron);margin-bottom:12px;font-family:"Segoe UI",sans-serif;
+    display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
+    color:#B05A0B;background:#fff;border:1px solid #F0E1CB;padding:7px 15px;border-radius:999px;
+    margin-bottom:16px;box-shadow:0 1px 2px rgba(22,48,42,.04);
   }
-  h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;line-height:1.3;letter-spacing:-.3px}
+  h2{font-family:"Rozha One","Mukta",Georgia,serif;font-size:clamp(1.68rem,3.3vw,2.4rem);font-weight:400;line-height:1.36;letter-spacing:0}
   h2 .en{font-size:1.02rem;font-weight:600;margin-top:8px;color:#7C8E87}
   .sec-head{max-width:680px;margin-bottom:44px}
   .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
@@ -242,8 +263,9 @@
   .problem{background:var(--milk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .card-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .p-card{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:.2s}
-  .p-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .p-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,48,42,.10)}
   .p-card .ico{width:52px;height:52px;border-radius:14px;background:var(--saffron-tint);display:grid;place-items:center;margin-bottom:16px}
+  .p-card .ico svg{width:26px;height:26px;stroke:var(--saffron);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .p-card h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
   .p-card h3 .en{font-size:.85rem;font-weight:600;color:#7C8E87}
   .p-card p{font-size:.95rem;color:var(--ink-soft)}
@@ -285,7 +307,7 @@
   .opt-grid .opt.skip{grid-column:1 / -1}
   .cutoff-note{margin-top:14px;font-size:.82rem;color:#7C8E87;text-align:center}
   .demand-table{width:100%;border-collapse:collapse;font-size:.98rem}
-  .demand-table th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:#7C8E87;padding:6px 8px;font-family:"Segoe UI",sans-serif}
+  .demand-table th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:#7C8E87;padding:6px 8px;font-family:inherit}
   .demand-table td{padding:11px 8px;border-bottom:1px dashed var(--line);font-weight:600}
   .demand-table td.n{text-align:right;font-variant-numeric:tabular-nums}
   .demand-table tr.total td{border:none;font-weight:800;font-size:1.12rem;color:var(--green-dark);padding-top:14px}
@@ -299,7 +321,7 @@
   .aud.a1{background:linear-gradient(180deg,#FFF9EF,#fff)}
   .aud.a2{background:linear-gradient(180deg,#E8F5EE,#fff)}
   .aud.a3{background:linear-gradient(180deg,#FFF1E2,#fff)}
-  .aud .who{font-size:.78rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--saffron);font-family:"Segoe UI",sans-serif}
+  .aud .who{font-size:.78rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--saffron);font-family:inherit}
   .aud h3{font-size:1.45rem;font-weight:800;margin:6px 0 2px}
   .aud h3 .en{font-size:.92rem;font-weight:600;color:#7C8E87}
   .aud ul{list-style:none;margin-top:18px;display:grid;gap:12px}
@@ -317,7 +339,7 @@
   .dash-card{background:#1F3D35;border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:28px;box-shadow:0 16px 40px rgba(0,0,0,.25)}
   .dash-card .greet{font-size:1.35rem;font-weight:800;color:#fff}
   .dash-card .greet span{display:block;font-size:.85rem;color:#9DBBAE;font-weight:500}
-  .dash-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin:22px 0 10px;font-family:"Segoe UI",sans-serif}
+  .dash-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin:22px 0 10px;font-family:inherit}
   .milk-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12);font-size:1.02rem}
   .milk-line b{color:#8CE0B8}
   .milk-line.grand{border:none;font-size:1.3rem;font-weight:800;color:#FFB25E;padding-top:14px}
@@ -326,9 +348,9 @@
   .dash-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
   .dash-actions .btn{flex:1;min-width:140px}
   .route-card{background:#16302A;border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:28px}
-  .route-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin-bottom:14px;font-family:"Segoe UI",sans-serif}
+  .route-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin-bottom:14px;font-family:inherit}
   .dlist{width:100%;border-collapse:collapse;font-size:.95rem}
-  .dlist th{text-align:left;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#84A797;padding:6px 8px;font-family:"Segoe UI",sans-serif}
+  .dlist th{text-align:left;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#84A797;padding:6px 8px;font-family:inherit}
   .dlist td{padding:10px 8px;border-bottom:1px dashed rgba(255,255,255,.1);color:#DCEBE4}
   .pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
   .pill.ok{background:rgba(140,224,184,.15);color:#8CE0B8}
@@ -351,7 +373,8 @@
   .vac-list .item{display:flex;gap:12px;align-items:flex-start;background:var(--milk);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
   .vac-list .item b{display:block;font-size:1rem}
   .vac-list .item .en{font-size:.83rem;color:#93A49D}
-  .vac-list .ico{font-size:1.3rem}
+  .vac-list .ico{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;background:var(--green-tint);border-radius:9px}
+  .vac-list .ico svg{width:18px;height:18px;stroke:var(--green);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .vac-note{margin-top:16px;font-size:.88rem;color:#7C8E87;background:#FFF9EF;border-radius:12px;padding:12px 16px}
   .vac-note .en{display:block;color:#93A49D;margin-top:4px}
 
@@ -375,8 +398,9 @@
   .village .sec-banner{background:#FFE7CD;border-color:#F3E3CF}
   .v-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .v-card{background:var(--milk);border-radius:18px;padding:26px 20px;text-align:center;border:1px solid #F3E3CF;transition:.2s}
-  .v-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
-  .v-card .emo{font-size:2rem;margin-bottom:10px}
+  .v-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,48,42,.10)}
+  .v-card .emo{display:grid;place-items:center;height:46px;margin-bottom:10px}
+  .v-card .emo svg{width:30px;height:30px;stroke:var(--green);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .v-card b{display:block;font-size:1.02rem;font-weight:800}
   .v-card .en{font-size:.82rem;color:#93A49D;margin-top:4px}
 
@@ -386,14 +410,14 @@
     background:var(--milk);border:1px solid var(--line);border-radius:22px;overflow:hidden;
     box-shadow:var(--shadow-sm);transition:.2s;display:flex;flex-direction:column;
   }
-  .screen-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .screen-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(22,48,42,.12)}
   .screen-img{background:var(--green-tint);border-bottom:1px solid var(--line)}
   .screen-img img{width:100%;height:195px;object-fit:cover}
   .screen-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
   .screen-chip{
     align-self:flex-start;font-size:.75rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
     background:var(--saffron-tint);color:#B05A0B;padding:5px 13px;border-radius:999px;
-    font-family:"Segoe UI",sans-serif;
+    font-family:inherit;
   }
   .screen-body h3{font-size:1.15rem;font-weight:800;line-height:1.35}
   .screen-body h3 .en{font-size:.87rem;font-weight:600;color:#7C8E87}
@@ -408,7 +432,7 @@
     background:var(--milk);border:1px solid var(--line);border-radius:24px;padding:34px;
     max-width:640px;margin:0 auto;box-shadow:var(--shadow);text-align:center;
   }
-  .forecast-box .day{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#7C8E87;font-weight:800;font-family:"Segoe UI",sans-serif}
+  .forecast-box .day{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#7C8E87;font-weight:800;font-family:inherit}
   .fc-row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:1rem}
   .fc-row:last-of-type{border:none}
   .fc-row b{font-variant-numeric:tabular-nums}
@@ -421,9 +445,9 @@
   .pricing{background:var(--milk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
   .plan{border:2px solid var(--line);border-radius:22px;padding:32px 28px;background:var(--cream);display:flex;flex-direction:column;position:relative;transition:.2s}
-  .plan:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .plan:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(22,48,42,.10)}
   .plan.pop{border-color:var(--green);background:#fff;box-shadow:var(--shadow)}
-  .plan .pop-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:.75rem;font-weight:800;padding:5px 16px;border-radius:999px;letter-spacing:1px;white-space:nowrap;font-family:"Segoe UI",sans-serif}
+  .plan .pop-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:.75rem;font-weight:800;padding:5px 16px;border-radius:999px;letter-spacing:1px;white-space:nowrap;font-family:inherit}
   .plan h3{font-size:1.25rem;font-weight:800}
   .plan h3 .en{font-size:.85rem;color:#7C8E87;font-weight:600}
   .plan .price{font-size:2.5rem;font-weight:800;color:var(--green-dark);margin:16px 0 2px;letter-spacing:-1px}
@@ -458,14 +482,14 @@
       linear-gradient(rgba(10,90,55,.90),rgba(15,122,74,.92)),
       url("images/cta-happy.jpg") center/cover no-repeat;
   }
-  .final-cta::before{content:"🥛";position:absolute;font-size:11rem;opacity:.10;top:-30px;right:-10px;transform:rotate(-15deg)}
+  .final-cta::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.07);top:-140px;right:-120px}
   .final-cta h2{color:#fff;position:relative}
   .final-cta h2 .en{color:#BFE7D3}
   .final-cta p{max-width:560px;margin:16px auto 0;color:#D7F0E4;font-size:1.03rem;position:relative}
   .final-cta p .en{color:#A9D8BF;font-size:.9rem}
   .signup{display:flex;gap:12px;max-width:520px;margin:30px auto 0;flex-wrap:wrap;justify-content:center;position:relative}
   .signup input{
-    flex:1;min-width:240px;padding:15px 22px;border-radius:999px;border:none;font-size:1rem;
+    flex:1;min-width:240px;padding:15px 22px;border-radius:12px;border:none;font-size:1rem;
     font-family:inherit;outline:3px solid transparent;transition:.2s;color:var(--ink);
   }
   .signup input:focus{outline-color:#FFB25E}
@@ -481,6 +505,11 @@
   .foot-brand p{font-size:.92rem;max-width:280px;margin-top:12px}
   .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.85rem}
   .made{color:#FFB25E;font-weight:700}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);transition-delay:var(--rv-d,0ms)}
+  .rv.rv-in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important;transition:none!important}}
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:980px){
@@ -612,7 +641,7 @@
 
     <div class="hero-visual">
       <div class="stat-card">
-        <div class="stat-head">🕗 <span class="lt" data-en="Evening — 8:00 PM">संध्याकाळ — ८:००</span><span class="live">Live</span></div>
+        <div class="stat-head"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg> <span class="lt" data-en="Evening — 8:00 PM">संध्याकाळ — ८:००</span><span class="live">Live</span></div>
         <div class="stat-row"><span><span class="lt" data-en="Notifications sent">सूचना पाठवल्या</span></span><b>318</b></div>
         <div class="stat-row"><span><span class="lt" data-en="Confirmed automatically">आपोआप पक्की झाल्या</span></span><b class="ok">312 ✓</b></div>
         <div class="stat-row"><span><span class="lt" data-en="Skipped by residents">रहिवासांनी सोडल्या</span></span><b>6</b></div>
@@ -620,7 +649,7 @@
       </div>
 
       <div class="mini-dash">
-        <span class="mini-badge">🕔 <span class="lt" data-en="5:00 AM — final list">5:00 AM — तयार यादी</span></span>
+        <span class="mini-badge"><span class="lt" data-en="5:00 AM — final list">5:00 AM — तयार यादी</span></span>
         <h4><span class="lt" data-en="DoodhWala · 5:00 AM list">DoodhWala · सकाळी ५:०० यादी</span></h4>
         <div class="mini-row"><span><span class="lt" data-en="Cow milk">गाय दूध</span></span><b id="heroCow">187 L</b></div>
         <div class="mini-row"><span><span class="lt" data-en="Buffalo milk">भैंसी दूध</span></span><b>43 L</b></div>
@@ -645,21 +674,21 @@
     </div>
     <div class="card-grid3">
       <div class="p-card">
-        <div class="ico">🤔</div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.1a2.7 2.7 0 1 1 3.8 2.5c-.9.4-1.2 1-1.2 1.9"/><path d="M12 17.2h.01"/></svg></div>
         <h3><span class="lt" data-en="Who needs how much?">कोण किती घेईल?</span><span class="en">Who needs how much?</span></h3>
         <p><span class="lt" data-en="500ml for one, 1 litre for another? Who is on vacation? Who wants buffalo milk? Everything is a guess.">कोणाला 500ml, कोणाला 1 लिटर? कोण सुट्टीवर आहे? कोणाला भैंसी दूध हवे? सगळा अंदाज.</span>
           <span class="en">500ml or 1L? Who's on vacation? Who wants buffalo milk? Pure guessing.</span>
         </p>
       </div>
       <div class="p-card">
-        <div class="ico">📉</div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 17 13 8 8 13 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div>
         <h3><span class="lt" data-en="Too much or too little — both hurt">जास्त-कमी दोन्हीच नुकसान</span><span class="en">Too much or too little — both hurt</span></h3>
         <p><span class="lt" data-en="Carry too much and the milk spoils. Carry too little and customers get angry — service suffers.">जास्त घेऊन गेल्यातर दूध उरते. कमी घेऊन गेल्यातर ग्राहक रागावतात आणि सेवा बिघडते.</span>
           <span class="en">Excess milk spoils. Short supply loses customers.</span>
         </p>
       </div>
       <div class="p-card">
-        <div class="ico">📒</div>
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h6a4 4 0 0 1 4 4v11a3.5 3.5 0 0 0-3.5-3H2z"/><path d="M22 5h-6a4 4 0 0 0-4 4v11a3.5 3.5 0 0 1 3.5-3H22z"/></svg></div>
         <h3><span class="lt" data-en="The register headache">वहीतला हिशोब</span><span class="en">The register headache</span></h3>
         <p><span class="lt" data-en="Dues, monthly bills, daily entries — all in a paper register. Even finding out who owes what takes work.">बाकी, महिना, रोजची नोंद — सगळं वहीत. कोण किती बाकीदार आहे हेही शोधावं लागतं.</span>
           <span class="en">Dues, monthly bills, daily entries — all in a paper register.</span>
@@ -688,7 +717,7 @@
         <p><span class="lt" data-en="Choose milk type, quantity and delivery days — cow, buffalo, 500ml to 2 litres, Monday to Sunday.">दूधाचा प्रकार, प्रमाण आणि दिवस निवडा — गाय, भैंसी, 500ml ते 2 लिटर, सोमवार ते रविवार.</span>
           <span class="en">Choose milk type, quantity and delivery days. That's your daily default.</span>
         </p>
-        <span class="time lt" data-en="⏱ Just 2 minutes">⏱ फक्त २ मिनिटे</span>
+        <span class="time lt" data-en="Just 2 minutes">फक्त २ मिनिटे</span>
       </div>
       <div class="step">
         <div class="num">2</div>
@@ -696,7 +725,7 @@
         <p><span class="lt" data-en="&ldquo;Tomorrow's milk: 1 litre. Change it?&rdquo; — keep it, change it, or skip. Do nothing and it stays confirmed.">&ldquo;कालचे दूध: 1 लिटर. बदलायचं?&rdquo; — ठेवा, बदला, किंवा सोडून द्या. काहीच न केल्यातर तशाच पक्की.</span>
           <span class="en">Keep, change, or skip. Do nothing and it confirms automatically.</span>
         </p>
-        <span class="time lt" data-en="🕗 Changes until 10:00 PM">🕗 बदलायची वेळ: रात्री १०:०० पर्यंत</span>
+        <span class="time lt" data-en="Changes until 10:00 PM">बदलायची वेळ: रात्री १०:०० पर्यंत</span>
       </div>
       <div class="step">
         <div class="num">3</div>
@@ -704,7 +733,7 @@
         <p><span class="lt" data-en="Society-wise, flat-wise quantities — everything known before he knocks on the first door.">सोसायटीनिहाय, फ्लॅटनिहाय प्रमाण. घर तोडल्याशिवाय सगळं सांगितलेलं.</span>
           <span class="en">Society-wise, flat-wise quantities — ready before he leaves.</span>
         </p>
-        <span class="time lt" data-en="🕔 List ready by 5:00 AM">🕔 सकाळी ५:०० यादी तयार</span>
+        <span class="time lt" data-en="List ready by 5:00 AM">सकाळी ५:०० यादी तयार</span>
       </div>
     </div>
 
@@ -732,7 +761,7 @@
       <!-- resident panel -->
       <div class="demo-panel">
         <div class="head">
-          <b><span class="lt" data-en="📱 Resident — 8:00 PM">📱 रहिवासी — संध्याकाळ ८:००</span></b>
+          <b><span class="lt" data-en="Resident — 8:00 PM">रहिवासी — संध्याकाळ ८:००</span></b>
           <span>XYZ Heights · Flat A-102</span>
         </div>
         <div class="body">
@@ -753,7 +782,7 @@
       <!-- milkman panel -->
       <div class="demo-panel">
         <div class="head">
-          <b><span class="lt" data-en="🚚 Milkman — tomorrow's demand">🚚 दूधवाला — उद्याची मागणी</span></b>
+          <b><span class="lt" data-en="Milkman — tomorrow's demand">दूधवाला — उद्याची मागणी</span></b>
           <span>29 Sep · XYZ Heights</span>
         </div>
         <div class="body">
@@ -898,9 +927,9 @@
         <span class="en">Going out of town? Just pick the dates.</span>
       </h2>
       <div class="vac-list">
-        <div class="item"><span class="ico">📅</span><div><b><span class="lt" data-en="No need to skip 15 days one by one">१५ दिवस सोडायचे नाहीत — एकदाच नोंद</span></b><span class="en">No need to skip 15 days one by one</span></div></div>
-        <div class="item"><span class="ico">⏸️</span><div><b><span class="lt" data-en="Delivery pauses automatically on those dates">सुट्टीच्या दिवशी दूध आपोआप थांबतो</span></b><span class="en">Delivery pauses automatically on those dates</span></div></div>
-        <div class="item"><span class="ico">▶️</span><div><b><span class="lt" data-en="Subscription resumes on its own when you're back">परत आल्यावर सदस्यता स्वयंचलित सुरू</span></b><span class="en">Subscription resumes on its own when you're back</span></div></div>
+        <div class="item"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></svg></span><div><b><span class="lt" data-en="No need to skip 15 days one by one">१५ दिवस सोडायचे नाहीत — एकदाच नोंद</span></b><span class="en">No need to skip 15 days one by one</span></div></div>
+        <div class="item"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="4.5" width="4" height="15" rx="1.2"/><rect x="13.5" y="4.5" width="4" height="15" rx="1.2"/></svg></span><div><b><span class="lt" data-en="Delivery pauses automatically on those dates">सुट्टीच्या दिवशी दूध आपोआप थांबतो</span></b><span class="en">Delivery pauses automatically on those dates</span></div></div>
+        <div class="item"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.8v14.4L19 12z"/></svg></span><div><b><span class="lt" data-en="Subscription resumes on its own when you're back">परत आल्यावर सदस्यता स्वयंचलित सुरू</span></b><span class="en">Subscription resumes on its own when you're back</span></div></div>
       </div>
     </div>
     <div class="vac-card">
@@ -978,10 +1007,10 @@
       <img src="images/village.jpg" alt="Village milkman pouring milk from a steel can in a rural setting" loading="lazy" width="1408" height="768">
     </div>
     <div class="v-grid">
-      <div class="v-card"><div class="emo">📲</div><b><span class="lt" data-en="Works on any simple phone">साध्या फोनवर चालतो</span></b><span class="en">Works on any phone with WhatsApp</span></div>
-      <div class="v-card"><div class="emo">🗣️</div><b><span class="lt" data-en="Understood in Marathi">मराठीत समजणारा</span></b><span class="en">Understands Marathi & English</span></div>
-      <div class="v-card"><div class="emo">📶</div><b><span class="lt" data-en="Works even on slow networks">कमी नेटवर्कमध्येही</span></b><span class="en">Lightweight — works on slow data</span></div>
-      <div class="v-card"><div class="emo">🤝</div><b><span class="lt" data-en="Keeps local relationships intact">नातेसंबंध टिकवतो</span></b><span class="en">Same local milkman — just better managed</span></div>
+      <div class="v-card"><div class="emo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div><b><span class="lt" data-en="Works on any simple phone">साध्या फोनवर चालतो</span></b><span class="en">Works on any phone with WhatsApp</span></div>
+      <div class="v-card"><div class="emo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5a2 2 0 0 1-2 2H8l-4.5 4V5a2 2 0 0 1 2-2H19a2 2 0 0 1 2 2z"/></svg></div><b><span class="lt" data-en="Understood in Marathi">मराठीत समजणारा</span></b><span class="en">Understands Marathi & English</span></div>
+      <div class="v-card"><div class="emo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5a15.5 15.5 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16.4a5 5 0 0 1 6 0"/><circle cx="12" cy="19.6" r="1"/></svg></div><b><span class="lt" data-en="Works even on slow networks">कमी नेटवर्कमध्येही</span></b><span class="en">Lightweight — works on slow data</span></div>
+      <div class="v-card"><div class="emo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><b><span class="lt" data-en="Keeps local relationships intact">नातेसंबंध टिकवतो</span></b><span class="en">Same local milkman — just better managed</span></div>
     </div>
   </div>
 </section>
@@ -1001,7 +1030,7 @@
           <img src="images/screen-mobile.jpg" alt="Mobile phone showing a milk notification card" loading="lazy" width="1408" height="768">
         </div>
         <div class="screen-body">
-          <span class="screen-chip">📱 <span class="lt" data-en="Mobile">मोबाइल</span></span>
+          <span class="screen-chip"><span class="lt" data-en="Mobile">मोबाइल</span></span>
           <h3><span class="lt" data-en="Residents order from anywhere">रहिवासी कुठूनही ऑर्डर देतील</span><span class="en">Residents order from anywhere</span></h3>
           <p><span class="lt" data-en="Evening notification, one-tap change or skip — the whole flow fits in one hand.">रात्रीची सूचना, एक टॅपात बदल किंवा सोडणे — सगळी प्रक्रिया एका हातात.</span>
             <span class="en">Evening notification, one-tap change or skip — the whole flow fits in one hand.</span>
@@ -1013,7 +1042,7 @@
           <img src="images/screen-tablet.jpg" alt="Tablet showing a delivery checklist" loading="lazy" width="1408" height="768">
         </div>
         <div class="screen-body">
-          <span class="screen-chip">🧾 <span class="lt" data-en="Tablet">टॅबलेट</span></span>
+          <span class="screen-chip"><span class="lt" data-en="Tablet">टॅबलेट</span></span>
           <h3><span class="lt" data-en="Delivery marking on the route">मार्गावरचे डिलिव्हरी मार्किंग</span><span class="en">Delivery marking on the route</span></h3>
           <p><span class="lt" data-en="Flat-wise list with delivered, not-home and skipped statuses — tap and it's recorded.">फ्लॅटनिहाय यादी — डिलिव्हर, घर बंद, सुट्टी; टॅप केलं की नोंद होते.</span>
             <span class="en">Delivered, not-home, skipped — tap and it's recorded.</span>
@@ -1025,7 +1054,7 @@
           <img src="images/screen-laptop.jpg" alt="Laptop showing a demand dashboard" loading="lazy" width="1408" height="768">
         </div>
         <div class="screen-body">
-          <span class="screen-chip">💻 <span class="lt" data-en="Laptop">लॅपटॉप</span></span>
+          <span class="screen-chip"><span class="lt" data-en="Laptop">लॅपटॉप</span></span>
           <h3><span class="lt" data-en="Society dashboard & reports">सोसायटी डॅशबोर्ड आणि अहवाल</span><span class="en">Society dashboard & reports</span></h3>
           <p><span class="lt" data-en="Adoption numbers, monthly consumption, demand forecasts — full detail on the big screen.">किती घरे सदस्य, महिन्याची वापर, मागणी अंदाज — मोठ्या स्क्रीनवर संपूर्ण तपशील.</span>
             <span class="en">Adoption numbers, monthly consumption, forecasts — full detail on the big screen.</span>
@@ -1120,7 +1149,7 @@
       </div>
     </div>
     <div class="free-note">
-      <span class="lt" data-en="🎉 Always free for residents. No charges.">🎉 रहिवासांसाठी — मोफत. कोणताही शुल्क नाही.</span>
+      <span class="lt" data-en="Always free for residents. No charges.">रहिवासांसाठी — मोफत. कोणताही शुल्क नाही.</span>
       <span class="en">Always free for residents — no fees, no commissions on milk.</span>
     </div>
   </div>
@@ -1172,7 +1201,7 @@
 <section id="join">
   <div class="wrap">
     <div class="final-cta">
-      <span style="font-size:2.2rem;display:inline-block;margin-bottom:10px;position:relative">🥛</span>
+      <span style="display:grid;place-items:center;width:58px;height:58px;border-radius:16px;margin:0 auto 16px;background:rgba(255,255,255,.15);position:relative"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 2h8v3l2 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8l2-3V2z" fill="#fff"/><circle cx="12" cy="15" r="2.4" fill="#0F7A4A"/></svg></span>
       <h2><span class="lt" data-en="Start today. Wake up tomorrow with the list already made.">आजच सुरू करा — उद्याची यादी तयार</span>
         <span class="en">Start today. Wake up tomorrow with the list already made.</span>
       </h2>
@@ -1426,6 +1455,25 @@ document.querySelectorAll('#demoOpts .opt').forEach(function(btn){
   setTimeout(function(){
     if(!touched && !widget.classList.contains('open')) setWidget(true);
   }, 2600);
+})();
+
+/* ================= SCROLL REVEAL ================= */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var sel = '.sec-head, .sec-banner, .p-card, .step, .callout, .demo-panel, .aud, .stat-card, .mini-dash, .vac-list .item, .vac-card, .wa-points .p, .v-card, .screen-card, .forecast-box, .plan, .faq, .free-note, .final-cta';
+  var targets = document.querySelectorAll(sel);
+  targets.forEach(function(el){
+    el.classList.add('rv');
+    var sibs = Array.prototype.filter.call(el.parentElement.children, function(c){return c.classList && c.classList.contains('rv');});
+    el.style.setProperty('--rv-d', Math.min(sibs.indexOf(el), 5) * 70 + 'ms');
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('rv-in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -50px 0px'});
+  targets.forEach(function(el){ io.observe(el); });
 })();
 
 /* ================= SIGNUP ================= */
