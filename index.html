@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoodhWala — कालचे दूध आजच ठरवा | Milk Subscription for Milkmen & Societies</title>
+<meta name="description" content="DoodhWala — दूधवाल्यांसाठी सदस्यता आणि रोजचा ऑर्डर. Residents confirm tomorrow's milk every evening; milkmen get exact society-wise demand every morning.">
+<style>
+  :root{
+    --ink:#16302A;
+    --ink-soft:#4E655D;
+    --green:#0F7A4A;
+    --green-dark:#0A5A37;
+    --green-tint:#E8F5EE;
+    --saffron:#EF7C1A;
+    --saffron-tint:#FFF1E2;
+    --cream:#FFF9EF;
+    --milk:#FFFFFF;
+    --line:#E4EDE7;
+    --red:#D64545;
+    --shadow:0 10px 30px rgba(22,48,42,.10);
+    --shadow-sm:0 4px 14px rgba(22,48,42,.08);
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans Devanagari","Nirmala UI","Mukta","Segoe UI",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .en{display:block;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink-soft);font-weight:400}
+  .en.muted{color:#7C8E87}
+  /* English mode: hide secondary English lines, primary text swaps via JS */
+  body.lang-en .en{display:none !important}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,249,239,.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;max-width:1120px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:.2px}
+  .logo .mark{width:38px;height:38px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:var(--shadow-sm);flex:0 0 auto}
+  .logo small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-soft);letter-spacing:.4px;text-transform:uppercase;font-family:"Segoe UI",system-ui,sans-serif}
+  nav.links{display:flex;align-items:center;gap:24px}
+  nav.links a{font-size:.95rem;font-weight:600;color:var(--ink)}
+  nav.links a:hover{color:var(--green)}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .lang-btn{
+    display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:999px;
+    border:2px solid var(--line);background:#fff;font-weight:800;font-size:.9rem;cursor:pointer;
+    font-family:inherit;color:var(--ink);transition:.15s;
+  }
+  .lang-btn:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 24px;border-radius:999px;font-weight:700;font-size:1rem;
+    border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
+    font-family:inherit;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(15,122,74,.35)}
+  .btn-primary:hover{background:var(--green-dark)}
+  .btn-ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+  .btn-saffron{background:var(--saffron);color:#fff;box-shadow:0 6px 18px rgba(239,124,26,.35)}
+  .btn-sm{padding:10px 20px;font-size:.92rem}
+
+  /* ---------- IMAGES ---------- */
+  .sec-banner{
+    border-radius:22px;overflow:hidden;box-shadow:var(--shadow-sm);
+    border:1px solid var(--line);margin-bottom:38px;background:var(--green-tint);
+  }
+  .sec-banner img{width:100%;height:250px;object-fit:cover}
+  .card-img{border-radius:14px;overflow:hidden;margin-bottom:18px;background:var(--green-tint);border:1px solid var(--line)}
+  .card-img img{width:100%;height:185px;object-fit:cover}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:70px 0 64px;overflow:hidden;position:relative;isolation:isolate}
+  /* background image carousel */
+  .hero-carousel{position:absolute;inset:0;z-index:0;overflow:hidden;background:#EAF3EE}
+  .hero-carousel .slide{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    opacity:0;animation:slideFade 30s infinite;will-change:opacity,transform;
+    filter:saturate(1.25) contrast(1.08) brightness(1.03);
+  }
+  .hero-carousel .slide:first-child{opacity:1}
+  .hero-carousel::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg,
+      rgba(255,249,239,.97) 0%,
+      rgba(255,249,239,.91) 32%,
+      rgba(255,249,239,.55) 56%,
+      rgba(255,249,239,.16) 78%,
+      rgba(255,249,239,.02) 100%);
+  }
+  @keyframes slideFade{
+    0%{opacity:0;transform:scale(1.02)}
+    3%{opacity:1}
+    17%{opacity:1;transform:scale(1.09)}
+    20%{opacity:0;transform:scale(1.11)}
+    100%{opacity:0;transform:scale(1.11)}
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:start;position:relative;z-index:2}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;background:var(--green-tint);color:var(--green-dark);
+    font-weight:700;font-size:.85rem;padding:8px 16px;border-radius:999px;margin-bottom:22px;
+    border:1px solid #CBE8D8;
+  }
+  h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.22;font-weight:800;letter-spacing:-.5px}
+  h1 .hl{color:var(--green);position:relative;white-space:nowrap}
+  h1 .en-line{display:block;font-size:clamp(1.05rem,2vw,1.35rem);font-weight:600;color:var(--ink-soft);margin-top:12px;letter-spacing:0}
+  .hero p.lead{font-size:1.1rem;color:var(--ink-soft);margin:22px 0 10px;max-width:540px}
+  .hero p.lead .en{font-size:.95rem;margin-top:6px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+  .hero-note{margin-top:18px;font-size:.9rem;color:#7C8E87;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+  /* hero visual — clean card stack */
+  .hero-visual{position:relative;z-index:2;display:flex;flex-direction:column;gap:16px}
+  .stat-card{
+    background:rgba(255,255,255,.87);border-radius:22px;box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.9);padding:22px 24px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .stat-head{
+    display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem;
+    padding-bottom:12px;border-bottom:1px dashed var(--line);margin-bottom:6px;
+  }
+  .stat-head .live{
+    margin-left:auto;font-size:.7rem;font-weight:800;letter-spacing:1px;color:var(--green);
+    background:var(--green-tint);padding:3px 10px;border-radius:999px;text-transform:uppercase;
+    font-family:"Segoe UI",sans-serif;display:inline-flex;align-items:center;gap:6px;
+  }
+  .stat-head .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.6s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .stat-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;font-size:.97rem;border-bottom:1px dashed var(--line)}
+  .stat-row:last-of-type{border:none}
+  .stat-row b{font-variant-numeric:tabular-nums}
+  .stat-row b.ok{color:var(--green)}
+  .stat-foot{
+    margin-top:10px;font-size:.8rem;font-weight:700;color:#9A5410;background:var(--saffron-tint);
+    padding:9px 14px;border-radius:10px;text-align:center;
+  }
+  .phone-card{
+    background:var(--milk);border-radius:26px;box-shadow:var(--shadow);
+    border:1px solid var(--line);padding:22px;
+  }
+  .phone-head{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px dashed var(--line);margin-bottom:16px}
+  .phone-head .dot{width:34px;height:34px;border-radius:50%;background:var(--saffron-tint);display:grid;place-items:center;font-size:1.1rem;flex:0 0 auto}
+  .phone-head b{font-size:.95rem;display:block}
+  .phone-head span{font-size:.78rem;color:#7C8E87}
+  .milk-big{font-size:2.6rem;font-weight:800;color:var(--green);line-height:1.1}
+  .milk-big small{font-size:1rem;color:var(--ink-soft);font-weight:600}
+  .opt-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .opt{
+    padding:12px 8px;border-radius:14px;border:2px solid var(--line);background:#fff;
+    font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit;color:var(--ink);
+    transition:.15s;
+  }
+  .opt:hover{border-color:var(--green);background:var(--green-tint)}
+  .opt.active{border-color:var(--green);background:var(--green);color:#fff}
+  .opt.skip{grid-column:1 / -1;border-color:#F3D3D3;color:var(--red);background:#FFF6F6}
+  .opt.skip:hover,.opt.skip.active{border-color:var(--red);background:var(--red);color:#fff}
+  .status-line{margin-top:14px;font-size:.9rem;font-weight:700;color:var(--green-dark);background:var(--green-tint);padding:10px 14px;border-radius:12px;text-align:center}
+  .status-line.skip-mode{background:#FFF1F1;color:var(--red)}
+  .mini-dash{
+    position:relative;z-index:1;width:100%;
+    background:var(--ink);color:#EAF3EE;
+    border-radius:22px;padding:22px 24px;box-shadow:var(--shadow);
+  }
+  .mini-dash .mini-badge{
+    display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:800;letter-spacing:1.2px;
+    text-transform:uppercase;color:#8CE0B8;background:rgba(140,224,184,.12);
+    padding:4px 12px;border-radius:999px;margin-bottom:14px;font-family:"Segoe UI",sans-serif;
+  }
+  .mini-dash h4{font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:#9DBBAE;margin-bottom:12px;font-family:"Segoe UI",sans-serif}
+  .mini-row{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+  .mini-row:last-child{border:none;font-weight:800;font-size:1.1rem;color:#8CE0B8;padding-top:10px}
+
+  /* ---------- FLOATING NOTIFICATION WIDGET ---------- */
+  .notif-widget{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom, 0px));z-index:90;display:flex;align-items:center;gap:10px}
+  .notif-bubble{
+    width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;
+    font-size:1.65rem;display:grid;place-items:center;position:relative;font-family:inherit;
+    box-shadow:0 12px 32px rgba(15,122,74,.45);
+    transition:transform .2s ease, box-shadow .2s ease;animation:bob 2.6s ease-in-out infinite;
+  }
+  .notif-bubble:hover{transform:scale(1.08)}
+  .notif-bubble::before{
+    content:"";position:absolute;inset:-5px;border-radius:50%;
+    border:2px solid rgba(15,122,74,.45);animation:ring 2.6s ease-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes ring{0%{transform:scale(.92);opacity:.9}70%{transform:scale(1.28);opacity:0}100%{opacity:0}}
+  .notif-widget.open .notif-bubble{animation:none}
+  .notif-label{
+    background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;font-size:.85rem;font-weight:800;color:var(--ink);font-family:inherit;
+    box-shadow:var(--shadow-sm);white-space:nowrap;cursor:pointer;transition:.2s;
+    display:flex;align-items:center;gap:7px;
+  }
+  .notif-label:hover{border-color:var(--green);color:var(--green-dark)}
+  .notif-widget.open .notif-label{opacity:0;pointer-events:none;transform:translateX(-8px)}
+  .notif-label{transition:opacity .2s, transform .2s, border-color .2s, color .2s}
+  .notif-panel{
+    position:absolute;left:0;bottom:74px;width:min(345px,calc(100vw - 36px));
+    transform-origin:bottom left;transform:scale(.85) translateY(14px);
+    opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.2,.9,.3,1.2), opacity .22s ease;
+    max-height:min(74vh,600px);overflow:auto;
+  }
+  .notif-widget.open .notif-panel{transform:scale(1) translateY(0);opacity:1;pointer-events:auto}
+  .notif-panel .phone-head{position:relative;padding-right:34px}
+  .notif-close{
+    position:absolute;top:-4px;right:-4px;width:30px;height:30px;border-radius:50%;
+    border:none;background:#F1F5F2;color:var(--ink-soft);font-weight:800;cursor:pointer;
+    font-size:.95rem;font-family:inherit;transition:.15s;
+  }
+  .notif-close:hover{background:var(--red);color:#fff}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:74px 0}
+  .sec-tag{
+    display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--saffron);margin-bottom:12px;font-family:"Segoe UI",sans-serif;
+  }
+  h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;line-height:1.3;letter-spacing:-.3px}
+  h2 .en{font-size:1.02rem;font-weight:600;margin-top:8px;color:#7C8E87}
+  .sec-head{max-width:680px;margin-bottom:44px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .has-banner .sec-head{margin-bottom:26px}
+
+  /* ---------- PROBLEM ---------- */
+  .problem{background:var(--milk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .card-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .p-card{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;transition:.2s}
+  .p-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .p-card .ico{width:52px;height:52px;border-radius:14px;background:var(--saffron-tint);display:grid;place-items:center;margin-bottom:16px}
+  .p-card h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
+  .p-card h3 .en{font-size:.85rem;font-weight:600;color:#7C8E87}
+  .p-card p{font-size:.95rem;color:var(--ink-soft)}
+  .p-card p .en{font-size:.84rem;margin-top:6px;color:#93A49D}
+
+  /* ---------- STEPS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+  .step{background:var(--milk);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;position:relative}
+  .step .num{
+    position:absolute;top:-18px;left:24px;width:40px;height:40px;border-radius:50%;
+    background:var(--green);color:#fff;font-weight:800;display:grid;place-items:center;font-size:1.05rem;
+    box-shadow:0 6px 14px rgba(15,122,74,.35);
+  }
+  .step h3{font-size:1.2rem;font-weight:800;margin:14px 0 4px}
+  .step h3 .en{font-size:.88rem;font-weight:600;color:#7C8E87}
+  .step p{font-size:.95rem;color:var(--ink-soft);margin-top:8px}
+  .step p .en{font-size:.84rem;color:#93A49D;margin-top:4px}
+  .step .time{display:inline-block;margin-top:14px;font-size:.8rem;font-weight:800;background:var(--green-tint);color:var(--green-dark);padding:5px 12px;border-radius:999px}
+  .callout{
+    margin-top:40px;background:var(--ink);color:#EAF3EE;border-radius:var(--radius);
+    padding:30px 34px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:space-between;
+  }
+  .callout b{font-size:1.3rem;font-weight:800;display:block}
+  .callout b .en{font-size:.95rem;color:#9DBBAE;font-weight:500}
+  .callout .tagpill{background:var(--saffron);color:#fff;font-weight:800;padding:12px 22px;border-radius:999px;font-size:1rem;white-space:nowrap}
+
+  /* ---------- LIVE DEMO ---------- */
+  .demo{background:var(--green-tint);border-top:1px solid #D4E9DD;border-bottom:1px solid #D4E9DD}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .demo-panel{background:var(--milk);border-radius:22px;border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden}
+  .demo-panel .head{padding:16px 22px;background:#F6FAF7;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .demo-panel .head b{font-size:1rem}
+  .demo-panel .head span{font-size:.78rem;color:#7C8E87;font-weight:600}
+  .demo-panel .body{padding:22px}
+  .qty-hero{font-size:3rem;font-weight:800;color:var(--green);line-height:1}
+  .qty-hero small{font-size:1.1rem;color:var(--ink-soft);font-weight:600}
+  .qty-sub{font-size:.88rem;color:#7C8E87;margin-top:4px}
+  .opt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+  .opt-grid .opt.skip{grid-column:1 / -1}
+  .cutoff-note{margin-top:14px;font-size:.82rem;color:#7C8E87;text-align:center}
+  .demand-table{width:100%;border-collapse:collapse;font-size:.98rem}
+  .demand-table th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:#7C8E87;padding:6px 8px;font-family:"Segoe UI",sans-serif}
+  .demand-table td{padding:11px 8px;border-bottom:1px dashed var(--line);font-weight:600}
+  .demand-table td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .demand-table tr.total td{border:none;font-weight:800;font-size:1.12rem;color:var(--green-dark);padding-top:14px}
+  .skip-note{margin-top:12px;font-size:.9rem;background:var(--saffron-tint);border-radius:12px;padding:12px 16px;font-weight:700;color:#9A5410}
+  .skip-note .en{display:inline;font-size:.85rem;font-weight:500;color:#B07433}
+  .demo-hint{margin-top:18px;text-align:center;font-size:.9rem;font-weight:700;color:var(--green-dark)}
+
+  /* ---------- AUDIENCE ---------- */
+  .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .aud{border-radius:var(--radius);padding:32px 28px;border:1px solid var(--line);background:var(--milk);position:relative;overflow:hidden}
+  .aud.a1{background:linear-gradient(180deg,#FFF9EF,#fff)}
+  .aud.a2{background:linear-gradient(180deg,#E8F5EE,#fff)}
+  .aud.a3{background:linear-gradient(180deg,#FFF1E2,#fff)}
+  .aud .who{font-size:.78rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--saffron);font-family:"Segoe UI",sans-serif}
+  .aud h3{font-size:1.45rem;font-weight:800;margin:6px 0 2px}
+  .aud h3 .en{font-size:.92rem;font-weight:600;color:#7C8E87}
+  .aud ul{list-style:none;margin-top:18px;display:grid;gap:12px}
+  .aud li{display:flex;gap:10px;font-size:.97rem;align-items:flex-start}
+  .aud li .tick{flex:0 0 22px;height:22px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin-top:2px}
+  .aud li .en{font-size:.82rem;color:#93A49D}
+
+  /* ---------- DASHBOARD MOCK ---------- */
+  .milkman-sec{background:var(--ink);color:#EAF3EE}
+  .milkman-sec h2{color:#fff}
+  .milkman-sec h2 .en{color:#9DBBAE}
+  .milkman-sec .sec-tag{color:#FFB25E}
+  .milkman-sec .sec-banner{border-color:rgba(255,255,255,.14);box-shadow:0 16px 40px rgba(0,0,0,.3);background:#1F3D35}
+  .milkman-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .dash-card{background:#1F3D35;border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:28px;box-shadow:0 16px 40px rgba(0,0,0,.25)}
+  .dash-card .greet{font-size:1.35rem;font-weight:800;color:#fff}
+  .dash-card .greet span{display:block;font-size:.85rem;color:#9DBBAE;font-weight:500}
+  .dash-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin:22px 0 10px;font-family:"Segoe UI",sans-serif}
+  .milk-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12);font-size:1.02rem}
+  .milk-line b{color:#8CE0B8}
+  .milk-line.grand{border:none;font-size:1.3rem;font-weight:800;color:#FFB25E;padding-top:14px}
+  .soc-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12);font-size:.98rem}
+  .soc-line:last-of-type{border:none}
+  .dash-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .dash-actions .btn{flex:1;min-width:140px}
+  .route-card{background:#16302A;border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:28px}
+  .route-card h5{font-size:.75rem;letter-spacing:1.6px;text-transform:uppercase;color:#84A797;margin-bottom:14px;font-family:"Segoe UI",sans-serif}
+  .dlist{width:100%;border-collapse:collapse;font-size:.95rem}
+  .dlist th{text-align:left;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#84A797;padding:6px 8px;font-family:"Segoe UI",sans-serif}
+  .dlist td{padding:10px 8px;border-bottom:1px dashed rgba(255,255,255,.1);color:#DCEBE4}
+  .pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
+  .pill.ok{background:rgba(140,224,184,.15);color:#8CE0B8}
+  .pill.skip{background:rgba(255,255,255,.08);color:#9DBBAE}
+  .pill.pend{background:rgba(255,178,94,.15);color:#FFB25E}
+  .route-note{margin-top:16px;font-size:.88rem;color:#9DBBAE}
+  .route-note .en{color:#7E9B8E}
+
+  /* ---------- VACATION ---------- */
+  .vac-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .vac-card{background:var(--milk);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow-sm)}
+  .date-flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:8px}
+  .date-box{background:var(--cream);border:2px solid var(--line);border-radius:16px;padding:14px 20px;text-align:center;min-width:110px}
+  .date-box b{display:block;font-size:1.3rem;color:var(--green-dark)}
+  .date-box span{font-size:.78rem;color:#7C8E87;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .date-arrow{font-size:1.4rem;color:var(--saffron);font-weight:800}
+  .resume{margin-top:18px;background:var(--green-tint);border-radius:14px;padding:14px 18px;font-weight:700;color:var(--green-dark);font-size:.95rem}
+  .resume .en{font-size:.82rem;color:#5E8A74;font-weight:500}
+  .vac-list{display:grid;gap:14px;margin-top:22px}
+  .vac-list .item{display:flex;gap:12px;align-items:flex-start;background:var(--milk);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .vac-list .item b{display:block;font-size:1rem}
+  .vac-list .item .en{font-size:.83rem;color:#93A49D}
+  .vac-list .ico{font-size:1.3rem}
+  .vac-note{margin-top:16px;font-size:.88rem;color:#7C8E87;background:#FFF9EF;border-radius:12px;padding:12px 16px}
+  .vac-note .en{display:block;color:#93A49D;margin-top:4px}
+
+  /* ---------- WHATSAPP ---------- */
+  .wa-sec{background:var(--milk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .wa-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+  .chat{background:#E9F5EC;border-radius:24px;padding:24px;box-shadow:var(--shadow-sm);border:1px solid #D4E9DD}
+  .bubble{max-width:85%;padding:13px 17px;border-radius:16px;font-size:.96rem;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);position:relative}
+  .bubble.in{background:#fff;border-top-left-radius:4px}
+  .bubble.out{background:#DCF8C6;margin-left:auto;border-top-right-radius:4px;font-weight:800}
+  .bubble small{display:block;font-size:.7rem;color:#7C8E87;margin-top:6px;text-align:right;font-weight:600}
+  .bubble b{color:var(--green-dark)}
+  .wa-points{display:grid;gap:16px;margin-top:26px}
+  .wa-points .p{display:flex;gap:14px;align-items:flex-start}
+  .wa-points .n{flex:0 0 34px;height:34px;border-radius:10px;background:var(--saffron-tint);display:grid;place-items:center;font-weight:800;color:var(--saffron);font-size:1rem}
+  .wa-points b{display:block;font-size:1.02rem}
+  .wa-points .en{font-size:.85rem;color:#93A49D}
+
+  /* ---------- VILLAGE ---------- */
+  .village{background:var(--saffron-tint);border-top:1px solid #F6DFC6;border-bottom:1px solid #F6DFC6}
+  .village .sec-banner{background:#FFE7CD;border-color:#F3E3CF}
+  .v-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .v-card{background:var(--milk);border-radius:18px;padding:26px 20px;text-align:center;border:1px solid #F3E3CF;transition:.2s}
+  .v-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .v-card .emo{font-size:2rem;margin-bottom:10px}
+  .v-card b{display:block;font-size:1.02rem;font-weight:800}
+  .v-card .en{font-size:.82rem;color:#93A49D;margin-top:4px}
+
+  /* ---------- EVERY SCREEN ---------- */
+  .screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .screen-card{
+    background:var(--milk);border:1px solid var(--line);border-radius:22px;overflow:hidden;
+    box-shadow:var(--shadow-sm);transition:.2s;display:flex;flex-direction:column;
+  }
+  .screen-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .screen-img{background:var(--green-tint);border-bottom:1px solid var(--line)}
+  .screen-img img{width:100%;height:195px;object-fit:cover}
+  .screen-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .screen-chip{
+    align-self:flex-start;font-size:.75rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    background:var(--saffron-tint);color:#B05A0B;padding:5px 13px;border-radius:999px;
+    font-family:"Segoe UI",sans-serif;
+  }
+  .screen-body h3{font-size:1.15rem;font-weight:800;line-height:1.35}
+  .screen-body h3 .en{font-size:.87rem;font-weight:600;color:#7C8E87}
+  .screen-body p{font-size:.93rem;color:var(--ink-soft)}
+  .screen-body p .en{font-size:.83rem;color:#93A49D;margin-top:4px}
+
+  /* ---------- FORECAST ---------- */
+  .pipe{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:36px}
+  .chip{background:var(--milk);border:1px solid var(--line);border-radius:999px;padding:10px 20px;font-weight:700;font-size:.93rem;box-shadow:var(--shadow-sm)}
+  .chip .arw{color:var(--saffron);margin:0 4px;font-weight:800}
+  .forecast-box{
+    background:var(--milk);border:1px solid var(--line);border-radius:24px;padding:34px;
+    max-width:640px;margin:0 auto;box-shadow:var(--shadow);text-align:center;
+  }
+  .forecast-box .day{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#7C8E87;font-weight:800;font-family:"Segoe UI",sans-serif}
+  .fc-row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:1rem}
+  .fc-row:last-of-type{border:none}
+  .fc-row b{font-variant-numeric:tabular-nums}
+  .fc-result{margin-top:16px;background:var(--green);color:#fff;border-radius:16px;padding:20px;font-weight:800;font-size:1.35rem}
+  .fc-result small{display:block;font-size:.85rem;font-weight:500;opacity:.88;margin-top:4px}
+  .fc-note{margin-top:22px;font-size:.95rem;color:var(--ink-soft);text-align:center;max-width:620px;margin-left:auto;margin-right:auto}
+  .fc-note .en{font-size:.85rem;color:#93A49D;margin-top:6px}
+
+  /* ---------- PRICING ---------- */
+  .pricing{background:var(--milk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .plan{border:2px solid var(--line);border-radius:22px;padding:32px 28px;background:var(--cream);display:flex;flex-direction:column;position:relative;transition:.2s}
+  .plan:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
+  .plan.pop{border-color:var(--green);background:#fff;box-shadow:var(--shadow)}
+  .plan .pop-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:.75rem;font-weight:800;padding:5px 16px;border-radius:999px;letter-spacing:1px;white-space:nowrap;font-family:"Segoe UI",sans-serif}
+  .plan h3{font-size:1.25rem;font-weight:800}
+  .plan h3 .en{font-size:.85rem;color:#7C8E87;font-weight:600}
+  .plan .price{font-size:2.5rem;font-weight:800;color:var(--green-dark);margin:16px 0 2px;letter-spacing:-1px}
+  .plan .price small{font-size:1rem;color:var(--ink-soft);font-weight:600}
+  .plan .for{font-size:.9rem;color:var(--ink-soft);min-height:44px}
+  .plan .for .en{font-size:.83rem;margin-top:2px}
+  .plan ul{list-style:none;margin:18px 0 26px;display:grid;gap:10px;flex:1}
+  .plan li{font-size:.94rem;display:flex;gap:9px;align-items:flex-start}
+  .plan li::before{content:"✓";color:var(--green);font-weight:800}
+  .free-note{
+    margin-top:30px;text-align:center;background:var(--green-tint);border-radius:16px;padding:20px;
+    font-weight:800;color:var(--green-dark);font-size:1.05rem;border:1px dashed #A9D8BF;
+  }
+  .free-note .en{font-size:.88rem;font-weight:500;color:#5E8A74}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{display:grid;gap:14px;max-width:820px;margin:0 auto}
+  details.faq{background:var(--milk);border:1px solid var(--line);border-radius:16px;padding:20px 24px;cursor:pointer}
+  details.faq summary{font-weight:800;font-size:1.03rem;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";font-size:1.5rem;color:var(--green);font-weight:600;transition:.2s;flex:0 0 auto}
+  details.faq[open] summary::after{content:"–"}
+  .sum-t{flex:1}
+  details.faq .ans{margin-top:12px;color:var(--ink-soft);font-size:.97rem}
+  details.faq .ans .en{font-size:.85rem;color:#93A49D;margin-top:6px}
+
+  /* ---------- CTA ---------- */
+  .final-cta{
+    border-radius:28px;padding:60px 40px;text-align:center;box-shadow:0 20px 50px rgba(15,122,74,.35);
+    position:relative;overflow:hidden;color:#fff;
+    background:
+      linear-gradient(rgba(10,90,55,.90),rgba(15,122,74,.92)),
+      url("images/cta-happy.jpg") center/cover no-repeat;
+  }
+  .final-cta::before{content:"🥛";position:absolute;font-size:11rem;opacity:.10;top:-30px;right:-10px;transform:rotate(-15deg)}
+  .final-cta h2{color:#fff;position:relative}
+  .final-cta h2 .en{color:#BFE7D3}
+  .final-cta p{max-width:560px;margin:16px auto 0;color:#D7F0E4;font-size:1.03rem;position:relative}
+  .final-cta p .en{color:#A9D8BF;font-size:.9rem}
+  .signup{display:flex;gap:12px;max-width:520px;margin:30px auto 0;flex-wrap:wrap;justify-content:center;position:relative}
+  .signup input{
+    flex:1;min-width:240px;padding:15px 22px;border-radius:999px;border:none;font-size:1rem;
+    font-family:inherit;outline:3px solid transparent;transition:.2s;color:var(--ink);
+  }
+  .signup input:focus{outline-color:#FFB25E}
+  .signup-ok{margin-top:16px;font-weight:800;color:#FFF3C4;display:none;position:relative}
+  .cta-sub{margin-top:18px;font-size:.88rem;color:#BFE7D3;position:relative}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#9DBBAE;padding:52px 0 110px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+  footer h6{color:#fff;font-size:.95rem;font-weight:800;margin-bottom:14px}
+  footer a{display:block;font-size:.92rem;padding:5px 0;color:#9DBBAE}
+  footer a:hover{color:#8CE0B8}
+  .foot-brand p{font-size:.92rem;max-width:280px;margin-top:12px}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.85rem}
+  .made{color:#FFB25E;font-weight:700}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-grid,.demo-grid,.milkman-grid,.vac-grid,.wa-grid{grid-template-columns:1fr}
+    .card-grid3,.steps,.aud-grid,.price-grid,.screens-grid{grid-template-columns:1fr}
+    .v-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    nav.links{display:none}
+    .hero-carousel::after{background:linear-gradient(180deg,rgba(255,249,239,.94) 0%,rgba(255,249,239,.88) 45%,rgba(255,249,239,.80) 100%)}
+    .hero{padding-top:46px}
+    section{padding:56px 0}
+    .sec-banner img{height:200px}
+    .notif-widget{left:14px;bottom:calc(14px + env(safe-area-inset-bottom, 0px))}
+    .screen-img img{height:230px}
+    .hero-visual{max-width:560px}
+  }
+  @media(max-width:768px){
+    .hero{padding:40px 0 48px}
+    .hero-cta{gap:10px}
+    .hero-cta .btn{flex:1;min-width:170px}
+    .callout{flex-direction:column;align-items:flex-start;gap:16px;padding:24px}
+    .callout .tagpill{white-space:normal;text-align:center}
+    .demo-panel .body{padding:18px 16px}
+    .demand-table th{font-size:.68rem;letter-spacing:.6px}
+    .demand-table td{padding:9px 5px}
+    .dlist th,.dlist td{padding:8px 5px}
+    .route-card,.dash-card{padding:22px 18px}
+    .forecast-box{padding:26px 20px}
+    details.faq{padding:16px 18px}
+    .chat{padding:18px 16px}
+    .bubble{font-size:.92rem;max-width:92%}
+    .screen-img img{height:210px}
+    .vac-card{padding:22px 20px}
+    .phone-card{padding:18px}
+    .stat-card,.mini-dash{padding:18px 20px}
+    .final-cta{padding:48px 26px}
+    .sec-banner{margin-bottom:30px}
+    .screens-grid{gap:20px}
+  }
+  @media(max-width:520px){
+    .v-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .opt-grid{grid-template-columns:1fr}
+    .final-cta{padding:40px 22px}
+    .callout{padding:24px}
+    .signup input{min-width:100%}
+    .sec-banner img{height:170px}
+    .lang-btn{padding:9px 13px}
+    .notif-label{display:none}
+    .notif-panel{width:calc(100vw - 32px)}
+    .logo small{display:none}
+    .logo{font-size:1.12rem}
+    .hero-cta .btn{width:100%}
+    .qty-hero{font-size:2.4rem}
+    .milk-big{font-size:2.2rem}
+    .stat-row{font-size:.9rem}
+    .callout .tagpill{font-size:.9rem;padding:10px 16px}
+    .plan .price{font-size:2.15rem}
+    .screen-img img{height:190px}
+    .screen-body{padding:18px 18px 22px}
+    .opt{font-size:.9rem}
+    .foot-bottom{flex-direction:column;gap:6px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero-carousel .slide{animation:none;opacity:0}
+    .hero-carousel .slide:first-child{opacity:1}
+    .notif-bubble,.notif-bubble::before,.stat-head .live::before{animation:none}
+    .notif-panel{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="DoodhWala home">
+      <span class="mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 2h8v3l2 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8l2-3V2z" fill="#fff"/><path d="M6 12h12v7H6z" fill="#0F7A4A" opacity=".25"/><circle cx="12" cy="15.5" r="2" fill="#0F7A4A"/></svg>
+      </span>
+      <span>DoodhWala<small><span class="lt" data-en="Milk subscription platform">दूधवाला • सदस्यता प्लॅटफॉर्म</span></small></span>
+    </a>
+    <nav class="links">
+      <a href="#how"><span class="lt" data-en="How it works">कसे चालते</span></a>
+      <a href="#who"><span class="lt" data-en="Who it's for">कोणासाठी</span></a>
+      <a href="#milkman"><span class="lt" data-en="For milkmen">दूधवाल्यासाठी</span></a>
+      <a href="#pricing"><span class="lt" data-en="Pricing">भांडवल</span></a>
+      <a href="#faq"><span class="lt" data-en="FAQ">प्रश्न</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" aria-label="Change language">
+        <span aria-hidden="true">🌐</span><span class="lang-label">EN</span>
+      </button>
+      <a href="#join" class="btn btn-primary btn-sm"><span class="lt" data-en="Start free">मोफत सुरू करा</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-carousel" aria-hidden="true">
+    <div class="slide" style="background-image:url('images/hero-delivery.jpg');animation-delay:0s"></div>
+    <div class="slide" style="background-image:url('images/morning-route.jpg');animation-delay:6s"></div>
+    <div class="slide" style="background-image:url('images/society.jpg');animation-delay:12s"></div>
+    <div class="slide" style="background-image:url('images/village.jpg');animation-delay:18s"></div>
+    <div class="slide" style="background-image:url('images/how-evening.jpg');animation-delay:24s"></div>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge"><span class="lt" data-en="For milkmen • residents • societies">🥛 दूधवाला • रहिवासी • सोसायटी सर्वांसाठी</span></span>
+      <h1>
+        <span class="lt" data-en="Tomorrow's milk,<br><span class='hl'>decided today.</span>">कालचे दूध<br><span class="hl">आजच ठरवा.</span></span>
+        <span class="en-line">Not by guesswork — by exact numbers.</span>
+      </h1>
+      <p class="lead">
+        <span class="lt" data-en="Residents only answer once each evening — how much milk they need tomorrow. The milkman's exact, society-wise list is ready before he leaves in the morning.">रहिवासी रात्री फक्त एकदा सांगतात — काल किती दूध हवे. दूधवाल्याला सकाळी जाण्याआधीच सगळी यादी तयार.</span>
+        <span class="en">Residents confirm once each evening. Your milkman gets the exact, society-wise demand before he starts his route.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#join" class="btn btn-primary"><span class="lt" data-en="Start as a milkman">दूधवाला म्हणून सुरू करा</span></a>
+        <a href="#how" class="btn btn-ghost"><span class="lt" data-en="See how it works →">कसे चालते पहा →</span></a>
+      </div>
+      <div class="hero-note">
+        <span class="lt" data-en="✅ Free for residents · No app — works on WhatsApp">✅ रहिवासांसाठी मोफत &nbsp;•&nbsp; अ‍ॅप नको, WhatsApp वर चालतो</span>
+        <span class="en" style="display:inline">— Free for residents · Works on WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="stat-card">
+        <div class="stat-head">🕗 <span class="lt" data-en="Evening — 8:00 PM">संध्याकाळ — ८:००</span><span class="live">Live</span></div>
+        <div class="stat-row"><span><span class="lt" data-en="Notifications sent">सूचना पाठवल्या</span></span><b>318</b></div>
+        <div class="stat-row"><span><span class="lt" data-en="Confirmed automatically">आपोआप पक्की झाल्या</span></span><b class="ok">312 ✓</b></div>
+        <div class="stat-row"><span><span class="lt" data-en="Skipped by residents">रहिवासांनी सोडल्या</span></span><b>6</b></div>
+        <div class="stat-foot"><span class="lt" data-en="⏰ After 10:00 PM changes are locked">⏰ रात्री १०:०० नंतर बदल बंद</span></div>
+      </div>
+
+      <div class="mini-dash">
+        <span class="mini-badge">🕔 <span class="lt" data-en="5:00 AM — final list">5:00 AM — तयार यादी</span></span>
+        <h4><span class="lt" data-en="DoodhWala · 5:00 AM list">DoodhWala · सकाळी ५:०० यादी</span></h4>
+        <div class="mini-row"><span><span class="lt" data-en="Cow milk">गाय दूध</span></span><b id="heroCow">187 L</b></div>
+        <div class="mini-row"><span><span class="lt" data-en="Buffalo milk">भैंसी दूध</span></span><b>43 L</b></div>
+        <div class="mini-row"><span><span class="lt" data-en="Skipped / paused">सुट्टी / थांबलेले</span></span><b id="heroSkip">45 घरे</b></div>
+        <div class="mini-row"><span><span class="lt" data-en="Total today">एकूण आज</span></span><b id="heroTotal">244 L</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="problem has-banner" id="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag"><span class="lt" data-en="The problem">आजची समस्या · The problem</span></span>
+      <h2><span class="lt" data-en="Every morning, the milkman still has to guess.">दूधवाला रोज अंदाजाने दूध घेतो.</span>
+        <span class="en">Every morning, the milkman still has to guess.</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/problem-guessing.jpg" alt="A worried milkman with his bicycle full of milk cans" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="card-grid3">
+      <div class="p-card">
+        <div class="ico">🤔</div>
+        <h3><span class="lt" data-en="Who needs how much?">कोण किती घेईल?</span><span class="en">Who needs how much?</span></h3>
+        <p><span class="lt" data-en="500ml for one, 1 litre for another? Who is on vacation? Who wants buffalo milk? Everything is a guess.">कोणाला 500ml, कोणाला 1 लिटर? कोण सुट्टीवर आहे? कोणाला भैंसी दूध हवे? सगळा अंदाज.</span>
+          <span class="en">500ml or 1L? Who's on vacation? Who wants buffalo milk? Pure guessing.</span>
+        </p>
+      </div>
+      <div class="p-card">
+        <div class="ico">📉</div>
+        <h3><span class="lt" data-en="Too much or too little — both hurt">जास्त-कमी दोन्हीच नुकसान</span><span class="en">Too much or too little — both hurt</span></h3>
+        <p><span class="lt" data-en="Carry too much and the milk spoils. Carry too little and customers get angry — service suffers.">जास्त घेऊन गेल्यातर दूध उरते. कमी घेऊन गेल्यातर ग्राहक रागावतात आणि सेवा बिघडते.</span>
+          <span class="en">Excess milk spoils. Short supply loses customers.</span>
+        </p>
+      </div>
+      <div class="p-card">
+        <div class="ico">📒</div>
+        <h3><span class="lt" data-en="The register headache">वहीतला हिशोब</span><span class="en">The register headache</span></h3>
+        <p><span class="lt" data-en="Dues, monthly bills, daily entries — all in a paper register. Even finding out who owes what takes work.">बाकी, महिना, रोजची नोंद — सगळं वहीत. कोण किती बाकीदार आहे हेही शोधावं लागतं.</span>
+          <span class="en">Dues, monthly bills, daily entries — all in a paper register.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" class="has-banner">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="How it works">कसे चालते · How it works</span></span>
+      <h2><span class="lt" data-en="Three steps. Zero daily effort.">तीन पायऱ्या. रोज काही करायचं नाही.</span>
+        <span class="en">Three steps. Zero daily effort.</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/how-evening.jpg" alt="Family checking tomorrow's milk notification on a phone in the evening" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3><span class="lt" data-en="Set your subscription — once">एकदाच सदस्यता सोडा</span><span class="en">Set your subscription — once</span></h3>
+        <p><span class="lt" data-en="Choose milk type, quantity and delivery days — cow, buffalo, 500ml to 2 litres, Monday to Sunday.">दूधाचा प्रकार, प्रमाण आणि दिवस निवडा — गाय, भैंसी, 500ml ते 2 लिटर, सोमवार ते रविवार.</span>
+          <span class="en">Choose milk type, quantity and delivery days. That's your daily default.</span>
+        </p>
+        <span class="time lt" data-en="⏱ Just 2 minutes">⏱ फक्त २ मिनिटे</span>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3><span class="lt" data-en="Every evening at 8 PM — one question">रात्री ८ वाजता — एक विचार</span><span class="en">Every evening at 8 PM — one question</span></h3>
+        <p><span class="lt" data-en="&ldquo;Tomorrow's milk: 1 litre. Change it?&rdquo; — keep it, change it, or skip. Do nothing and it stays confirmed.">&ldquo;कालचे दूध: 1 लिटर. बदलायचं?&rdquo; — ठेवा, बदला, किंवा सोडून द्या. काहीच न केल्यातर तशाच पक्की.</span>
+          <span class="en">Keep, change, or skip. Do nothing and it confirms automatically.</span>
+        </p>
+        <span class="time lt" data-en="🕗 Changes until 10:00 PM">🕗 बदलायची वेळ: रात्री १०:०० पर्यंत</span>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3><span class="lt" data-en="Morning — exact list for the milkman">सकाळी दूधवालाला तयार यादी</span><span class="en">Morning — exact list for the milkman</span></h3>
+        <p><span class="lt" data-en="Society-wise, flat-wise quantities — everything known before he knocks on the first door.">सोसायटीनिहाय, फ्लॅटनिहाय प्रमाण. घर तोडल्याशिवाय सगळं सांगितलेलं.</span>
+          <span class="en">Society-wise, flat-wise quantities — ready before he leaves.</span>
+        </p>
+        <span class="time lt" data-en="🕔 List ready by 5:00 AM">🕔 सकाळी ५:०० यादी तयार</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div>
+        <b><span class="lt" data-en="Subscription = default. Change = only an exception.">सदस्यता = डीफॉल्ट. बदल = फक्त अपवाद.</span>
+          <span class="en">Subscription by default. Changes only as exceptions.</span>
+        </b>
+      </div>
+      <span class="tagpill lt" data-en="🥛 No daily ordering needed">🥛 रोज ऑर्डर द्यायची गरज नाही</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE DEMO ================= -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Live demo">थेट पाहा · Live demo</span></span>
+      <h2><span class="lt" data-en="Change one resident's order — the milkman's list updates instantly">रहिवासीने बदलला की, दूधवाल्याची यादी लगेच बदलते</span>
+        <span class="en">Change one resident's order — watch the milkman's demand update instantly</span>
+      </h2>
+    </div>
+    <div class="demo-grid">
+      <!-- resident panel -->
+      <div class="demo-panel">
+        <div class="head">
+          <b><span class="lt" data-en="📱 Resident — 8:00 PM">📱 रहिवासी — संध्याकाळ ८:००</span></b>
+          <span>XYZ Heights · Flat A-102</span>
+        </div>
+        <div class="body">
+          <div class="qty-hero" id="demoQty">1 <small><span class="lt" data-en="litres · cow milk">लिटर · गाय दूध</span></small></div>
+          <div class="qty-sub"><span class="lt" data-en="Tomorrow's milk — want to change it?">कालचे दूध — बदलायचा का?</span></div>
+          <div class="opt-grid" id="demoOpts">
+            <button class="opt active lt" data-q="1" data-en="✓ Keep 1 litre">✓ 1 लिटर ठेवा</button>
+            <button class="opt lt" data-q="0.5" data-en="500 ml">500 मि.लि.</button>
+            <button class="opt lt" data-q="1.5" data-en="1.5 litres">1.5 लिटर</button>
+            <button class="opt lt" data-q="2" data-en="2 litres">2 लिटर</button>
+            <button class="opt skip lt" data-q="skip" data-en="Skip tomorrow (काल सुट्टी)">काल सुट्टी (Skip tomorrow)</button>
+          </div>
+          <div class="status-line" id="demoStatus">काहीच न केल्यातर — 1 लिटर आपोआप पक्की ✓</div>
+          <div class="cutoff-note">⏰ <span class="lt" data-en="Last chance to change: <b>10:00 PM</b>">बदल करण्याची शेवटची वेळ: रात्री <b>१०:००</b></span> <span class="en" style="display:inline">· Changes close at 10:00 PM</span></div>
+        </div>
+      </div>
+
+      <!-- milkman panel -->
+      <div class="demo-panel">
+        <div class="head">
+          <b><span class="lt" data-en="🚚 Milkman — tomorrow's demand">🚚 दूधवाला — उद्याची मागणी</span></b>
+          <span>29 Sep · XYZ Heights</span>
+        </div>
+        <div class="body">
+          <table class="demand-table">
+            <thead>
+              <tr>
+                <th><span class="lt" data-en="Size">प्रमाण · Size</span></th>
+                <th style="text-align:right"><span class="lt" data-en="Homes">घरे · Homes</span></th>
+                <th style="text-align:right"><span class="lt" data-en="Litres">एकूण · Litres</span></th>
+              </tr>
+            </thead>
+            <tbody id="demandBody">
+              <tr><td><span class="lt" data-en="500 ml">500 मि.लि.</span></td><td class="n" data-homes="0.5">64</td><td class="n" data-litres="0.5">32.0 L</td></tr>
+              <tr><td><span class="lt" data-en="1 litre">1 लिटर</span></td><td class="n" data-homes="1">143</td><td class="n" data-litres="1">143.0 L</td></tr>
+              <tr><td><span class="lt" data-en="1.5 litres">1.5 लिटर</span></td><td class="n" data-homes="1.5">18</td><td class="n" data-litres="1.5">27.0 L</td></tr>
+              <tr><td><span class="lt" data-en="2 litres">2 लिटर</span></td><td class="n" data-homes="2">21</td><td class="n" data-litres="2">42.0 L</td></tr>
+              <tr class="total"><td><span class="lt" data-en="Total">एकूण · Total</span></td><td class="n" id="totalHomes">246</td><td class="n" id="totalL">244.0 L</td></tr>
+            </tbody>
+          </table>
+          <div class="skip-note"><span class="lt" data-en="😴 Paused / skipped: ">😴 सुट्टी / थांबलेले: </span><span id="skipHomes">45</span><span class="lt" data-en=" homes"> घरे</span> <span class="en">· Paused / skipped homes</span></div>
+          <div class="demo-hint" id="demoHint">👆 डावीकडे बदल करा — यादी लगेच अपडेट होईल</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THREE USERS ================= -->
+<section id="who" class="has-banner">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Built for three">कोणासाठी · Built for three</span></span>
+      <h2><span class="lt" data-en="Everyone gets something">तिघांचं तिघांना लाभ</span>
+        <span class="en">One platform, three users</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/society.jpg" alt="Apartment society building with residents and a crate of milk bottles" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="aud-grid">
+      <div class="aud a1">
+        <span class="who lt" data-en="Resident">रहिवासी · Resident</span>
+        <h3><span class="lt" data-en="Milk, without lifting a finger">दूध आपोआप मिळत राहील</span><span class="en">Milk, without lifting a finger</span></h3>
+        <ul>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="No daily ordering ritual">रोज ऑर्डर द्यायची गरज नाही</span><span class="en">No daily ordering ritual</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Change quantity or skip any day">प्रमाण बदला, किंवा एक दिवस सोडा</span><span class="en">Change quantity or skip any day</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Vacation mode: pause, then auto-resume">सुट्टी मोड — तारखा दिल्यातर आपोआप थांबतो</span><span class="en">Vacation mode: pause, then auto-resume</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Monthly bill & payment history">महिन्याचा हिशोब आणि पेमेंट इतिहास</span><span class="en">Monthly bill & payment history</span></div></li>
+        </ul>
+      </div>
+      <div class="aud a2">
+        <span class="who lt" data-en="Milkman">दूधवाला · Milkman</span>
+        <h3><span class="lt" data-en="Know the load before you leave">जाण्याआधीच पूर्ण यादी</span><span class="en">Know the load before you leave</span></h3>
+        <ul>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Tomorrow's total demand, society-wise">उद्याची एकूण मागणी — सोसायटीनिहाय</span><span class="en">Tomorrow's total demand, society-wise</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Flat-wise delivery list + marking">फ्लॅटनिहाय डिलिव्हरी लिस्ट + डिलिव्हर चिन्हांकन</span><span class="en">Flat-wise delivery list + marking</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Dues & daily collection made simple">बाकीदार आणि रोजची वसुली सोपी</span><span class="en">Dues & daily collection made simple</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="New signups & paused accounts in one place">नवीन सदस्यता, थांबलेले खाती — एकाच ठिकाणी</span><span class="en">New signups & paused accounts in one place</span></div></li>
+        </ul>
+      </div>
+      <div class="aud a3">
+        <span class="who lt" data-en="Society / Admin">सोसायटी / ऍडमिन · Society</span>
+        <h3><span class="lt" data-en="Reliable service, fewer complaints">व्यवस्थित सेवा, कमी तक्रारी</span><span class="en">Reliable service, fewer complaints</span></h3>
+        <ul>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Onboard & approve local vendors">दूधवाला आणि विक्रेत्यांची नोंदणी</span><span class="en">Onboard & approve local vendors</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Clear adoption numbers per building">किती घरे सदस्य आहेत — स्पष्ट आकडे</span><span class="en">Clear adoption numbers per building</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Monthly consumption & complaints">महिन्याची वापर नोंद आणि तक्रारी</span><span class="en">Monthly consumption & complaints</span></div></li>
+          <li><span class="tick"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></span><div><span class="lt" data-en="Scheduled service for residents — no manual coordination">घरांना शिस्तबद्ध सेवा — हाताने व्यवस्थापन नाही</span><span class="en">No more manual coordination with the milkman</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MILKMAN DASHBOARD ================= -->
+<section class="milkman-sec has-banner" id="milkman">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag"><span class="lt" data-en="The milkman's morning">दूधवाल्याची सकाळ · The milkman's morning</span></span>
+      <h2><span class="lt" data-en="No cluttered charts. Just today's list.">47 चार्ट नाही. फक्त आजची यादी.</span>
+        <span class="en">No cluttered analytics — just what you need today.</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/morning-route.jpg" alt="Milkman loading milk cans onto a scooter early in the morning" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="milkman-grid">
+      <div class="dash-card">
+        <div class="greet"><span class="lt" data-en="Good morning, Ramesh 👋">नमस्कार, रमेश 👋</span><span>Good morning · 29 September · XYZ Heights route</span></div>
+        <h5><span class="lt" data-en="Today's demand">आजची दूधाची मागणी · Today's demand</span></h5>
+        <div class="milk-line"><span><span class="lt" data-en="🥛 Cow milk">🥛 गाय दूध · Cow</span></span><b>187 L</b></div>
+        <div class="milk-line"><span><span class="lt" data-en="🥛 Buffalo milk">🥛 भैंसी दूध · Buffalo</span></span><b>43 L</b></div>
+        <div class="milk-line"><span><span class="lt" data-en="🥛 Toned milk">🥛 टोंड दूध · Toned</span></span><b>14 L</b></div>
+        <div class="milk-line grand"><span><span class="lt" data-en="एकूण · Total">एकूण · Total</span></span><b>244 L</b></div>
+        <h5><span class="lt" data-en="Society-wise">सोसायटीनिहाय · Society-wise</span></h5>
+        <div class="soc-line"><span>XYZ Heights</span><b>142 L</b></div>
+        <div class="soc-line"><span>Green Residency</span><b>58 L</b></div>
+        <div class="soc-line"><span>Sunshine Towers</span><b>44 L</b></div>
+        <div class="dash-actions">
+          <a href="#join" class="btn btn-primary btn-sm"><span class="lt" data-en="View delivery list">डिलिव्हरी लिस्ट पहा</span></a>
+          <a href="#join" class="btn btn-ghost btn-sm" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)"><span class="lt" data-en="View collections">वसुली पहा</span></a>
+        </div>
+      </div>
+
+      <div class="route-card">
+        <h5><span class="lt" data-en="Delivery list · XYZ Heights — Building A">डिलिव्हरी लिस्ट · XYZ Heights — Building A</span></h5>
+        <table class="dlist">
+          <thead><tr>
+            <th><span class="lt" data-en="Flat">फ्लॅट</span></th>
+            <th><span class="lt" data-en="Size">प्रमाण</span></th>
+            <th><span class="lt" data-en="Status">स्थिती</span></th>
+          </tr></thead>
+          <tbody>
+            <tr><td>A-101</td><td><span class="lt" data-en="1 litre">1 लिटर</span></td><td><span class="pill ok lt" data-en="✓ Delivered">✓ डिलिव्हर</span></td></tr>
+            <tr><td>A-102</td><td><span class="lt" data-en="500 ml">500 मि.लि.</span></td><td><span class="pill ok lt" data-en="✓ Delivered">✓ डिलिव्हर</span></td></tr>
+            <tr><td>A-103</td><td>—</td><td><span class="pill skip lt" data-en="Skip">सुट्टी</span></td></tr>
+            <tr><td>A-104</td><td><span class="lt" data-en="1 litre">1 लिटर</span></td><td><span class="pill ok lt" data-en="✓ Delivered">✓ डिलिव्हर</span></td></tr>
+            <tr><td>A-105</td><td><span class="lt" data-en="2 litres">2 लिटर</span></td><td><span class="pill pend lt" data-en="Pending">बाकी</span></td></tr>
+            <tr><td>A-106</td><td><span class="lt" data-en="1.5 litres">1.5 लिटर</span></td><td><span class="pill pend lt" data-en="Pending">बाकी</span></td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
+          <span class="pill ok lt" data-en="✓ Delivered">✓ डिलिव्हर झाले</span>
+          <span class="pill pend lt" data-en="Not home">घर बंद</span>
+          <span class="pill pend lt" data-en="Out of milk">दूध संपले</span>
+          <span class="pill skip">—</span>
+        </div>
+        <p class="route-note"><span class="lt" data-en="One tap per home — end-of-day reconciliation happens automatically.">एक टॅपात नोंद — दिवसाच्या शेवटी तपासणी (reconciliation) आपोआप.</span>
+          <span class="en">One tap per home — end-of-day reconciliation happens automatically.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VACATION ================= -->
+<section id="vacation">
+  <div class="wrap vac-grid">
+    <div>
+      <span class="sec-tag"><span class="lt" data-en="Vacation mode">सुट्टी मोड · Vacation mode</span></span>
+      <h2><span class="lt" data-en="Going out of town? Just pick the dates.">गावाला जायचं? फक्त तारखा द्या.</span>
+        <span class="en">Going out of town? Just pick the dates.</span>
+      </h2>
+      <div class="vac-list">
+        <div class="item"><span class="ico">📅</span><div><b><span class="lt" data-en="No need to skip 15 days one by one">१५ दिवस सोडायचे नाहीत — एकदाच नोंद</span></b><span class="en">No need to skip 15 days one by one</span></div></div>
+        <div class="item"><span class="ico">⏸️</span><div><b><span class="lt" data-en="Delivery pauses automatically on those dates">सुट्टीच्या दिवशी दूध आपोआप थांबतो</span></b><span class="en">Delivery pauses automatically on those dates</span></div></div>
+        <div class="item"><span class="ico">▶️</span><div><b><span class="lt" data-en="Subscription resumes on its own when you're back">परत आल्यावर सदस्यता स्वयंचलित सुरू</span></b><span class="en">Subscription resumes on its own when you're back</span></div></div>
+      </div>
+    </div>
+    <div class="vac-card">
+      <div class="card-img">
+        <img src="images/vacation.jpg" alt="Family leaving for vacation with suitcases" loading="lazy" width="1408" height="768">
+      </div>
+      <div style="font-weight:800;font-size:1.1rem;margin-bottom:6px"><span class="lt" data-en="Vacation mode · Pause subscription">सुट्टी मोड · Pause subscription</span></div>
+      <div style="font-size:.9rem;color:#7C8E87"><span class="lt" data-en="Trip: Mumbai → hometown">प्रवास: मुंबई → गाव</span></div>
+      <div class="date-flow">
+        <div class="date-box"><b>02 Oct</b><span class="lt" data-en="Start">सुरुवात</span></div>
+        <span class="date-arrow">→</span>
+        <div class="date-box"><b>15 Oct</b><span class="lt" data-en="End">समाप्त</span></div>
+      </div>
+      <div class="resume"><span class="lt" data-en="✅ Delivery auto-resumes on 16 October">✅ 16 Oct रोज दूध आपोआप पुन्हा सुरू</span><span class="en">Delivery auto-resumes on 16 October</span></div>
+      <div class="vac-note"><span class="lt" data-en="For these 14 days the milkman's demand drops automatically — zero waste.">या १४ दिवसांत दूधवाल्याची मागणीही त्यानुसार कमी होते — दूध बर्बार नाही.</span>
+        <span class="en">The milkman's morning totals shrink automatically — zero waste.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHATSAPP FIRST ================= -->
+<section class="wa-sec" id="whatsapp">
+  <div class="wrap wa-grid">
+    <div>
+      <span class="sec-tag"><span class="lt" data-en="WhatsApp first">WhatsApp आधी · WhatsApp first</span></span>
+      <h2><span class="lt" data-en="No app to download.">अ‍ॅप डाउनलोड करायची गरज नाही.</span>
+        <span class="en">No app install. It works where people already chat.</span>
+      </h2>
+      <div class="wa-points">
+        <div class="p"><span class="n">1</span><div><b><span class="lt" data-en="A message arrives at 8 PM">रात्री ८ वाजता मेसेज येईल</span></b><span class="en">An 8 PM message with tomorrow's default quantity</span></div></div>
+        <div class="p"><span class="n">2</span><div><b><span class="lt" data-en="Reply with a single digit — 1, 2, 3 or 4">फक्त एक अंक लिहा — 1, 2, 3 किंवा 4</span></b><span class="en">Reply with a single digit to keep, change or skip</span></div></div>
+        <div class="p"><span class="n">3</span><div><b><span class="lt" data-en="Done — the cycle repeats the next evening">झालं. पुढच्या दिवशी परत तीच प्रक्रिया</span></b><span class="en">Done — the cycle repeats the next evening</span></div></div>
+      </div>
+      <a href="#join" class="btn btn-saffron" style="margin-top:28px"><span class="lt" data-en="Start on WhatsApp">WhatsApp वर सुरू करा</span></a>
+    </div>
+    <div>
+      <div class="sec-banner" style="margin-bottom:18px">
+        <img src="images/whatsapp-hand.jpg" alt="Hand holding a phone showing chat bubbles with a milk bottle" loading="lazy" width="1408" height="768">
+      </div>
+      <div class="chat">
+        <div class="bubble in">
+          <span class="lt" data-en="🥛 <b>Tomorrow's milk:</b> 1 litre (cow)<br>Change it? If not, do nothing.">🥛 <b>कालचे दूध:</b> 1 लिटर (गाय)<br>बदलायचं का? जर नाही, तर काहीच करू नका.</span>
+          <small><span class="lt" data-en="Today 8:00 PM">आज 8:00 PM</span></small>
+        </div>
+        <div class="bubble out">1<small><span class="lt" data-en="500 ml">500 मि.लि.</span></small></div>
+        <div class="bubble in">
+          <span class="lt" data-en="✅ Got it! <b>500 ml</b> milk tomorrow. Good night.">✅ समजले! काल <b>500 मि.लि.</b> दूध येईल. शुभरात्री.</span>
+          <small><span class="lt" data-en="Today 8:02 PM">आज 8:02 PM</span></small>
+        </div>
+        <div class="bubble in" style="margin-top:18px">
+          <span class="lt" data-en="🥛 Tomorrow's milk: 500 ml<br><b>4</b> → skip">🥛 कालचे दूध: 500 मि.लि.<br><b>4</b> → सोडा (skip)</span>
+          <small><span class="lt" data-en="Tomorrow 8:00 PM">उद्या 8:00 PM</span></small>
+        </div>
+        <div class="bubble out">4<small><span class="lt" data-en="Skip tomorrow">काल सुट्टी</span></small></div>
+        <div class="bubble in">
+          <span class="lt" data-en="😴 Milk paused for tomorrow. See you the day after.">😴 काल दूध थांबविले. परवा पुन्हा मिळू.</span>
+          <small><span class="lt" data-en="Tomorrow 8:01 PM">उद्या 8:01 PM</span></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VILLAGE FRIENDLY ================= -->
+<section class="village has-banner">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Simple for everyone">सोपे · Simple for everyone</span></span>
+      <h2><span class="lt" data-en="Simple enough for any village, any phone">गावातल्या दूधवाल्याही सहज समजेल</span>
+        <span class="en">Simple enough for any village, any phone</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/village.jpg" alt="Village milkman pouring milk from a steel can in a rural setting" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="v-grid">
+      <div class="v-card"><div class="emo">📲</div><b><span class="lt" data-en="Works on any simple phone">साध्या फोनवर चालतो</span></b><span class="en">Works on any phone with WhatsApp</span></div>
+      <div class="v-card"><div class="emo">🗣️</div><b><span class="lt" data-en="Understood in Marathi">मराठीत समजणारा</span></b><span class="en">Understands Marathi & English</span></div>
+      <div class="v-card"><div class="emo">📶</div><b><span class="lt" data-en="Works even on slow networks">कमी नेटवर्कमध्येही</span></b><span class="en">Lightweight — works on slow data</span></div>
+      <div class="v-card"><div class="emo">🤝</div><b><span class="lt" data-en="Keeps local relationships intact">नातेसंबंध टिकवतो</span></b><span class="en">Same local milkman — just better managed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVERY SCREEN ================= -->
+<section class="has-banner" id="screens">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Works on every screen">प्रत्येक स्क्रीनवर · Works on every screen</span></span>
+      <h2><span class="lt" data-en="Phone, tablet, laptop — one platform">फोन, टॅबलेट, लॅपटॉप — एकच प्लॅटफॉर्म</span>
+        <span class="en">Phone, tablet, laptop — one platform</span>
+      </h2>
+    </div>
+    <div class="screens-grid">
+      <div class="screen-card">
+        <div class="screen-img">
+          <img src="images/screen-mobile.jpg" alt="Mobile phone showing a milk notification card" loading="lazy" width="1408" height="768">
+        </div>
+        <div class="screen-body">
+          <span class="screen-chip">📱 <span class="lt" data-en="Mobile">मोबाइल</span></span>
+          <h3><span class="lt" data-en="Residents order from anywhere">रहिवासी कुठूनही ऑर्डर देतील</span><span class="en">Residents order from anywhere</span></h3>
+          <p><span class="lt" data-en="Evening notification, one-tap change or skip — the whole flow fits in one hand.">रात्रीची सूचना, एक टॅपात बदल किंवा सोडणे — सगळी प्रक्रिया एका हातात.</span>
+            <span class="en">Evening notification, one-tap change or skip — the whole flow fits in one hand.</span>
+          </p>
+        </div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-img">
+          <img src="images/screen-tablet.jpg" alt="Tablet showing a delivery checklist" loading="lazy" width="1408" height="768">
+        </div>
+        <div class="screen-body">
+          <span class="screen-chip">🧾 <span class="lt" data-en="Tablet">टॅबलेट</span></span>
+          <h3><span class="lt" data-en="Delivery marking on the route">मार्गावरचे डिलिव्हरी मार्किंग</span><span class="en">Delivery marking on the route</span></h3>
+          <p><span class="lt" data-en="Flat-wise list with delivered, not-home and skipped statuses — tap and it's recorded.">फ्लॅटनिहाय यादी — डिलिव्हर, घर बंद, सुट्टी; टॅप केलं की नोंद होते.</span>
+            <span class="en">Delivered, not-home, skipped — tap and it's recorded.</span>
+          </p>
+        </div>
+      </div>
+      <div class="screen-card">
+        <div class="screen-img">
+          <img src="images/screen-laptop.jpg" alt="Laptop showing a demand dashboard" loading="lazy" width="1408" height="768">
+        </div>
+        <div class="screen-body">
+          <span class="screen-chip">💻 <span class="lt" data-en="Laptop">लॅपटॉप</span></span>
+          <h3><span class="lt" data-en="Society dashboard & reports">सोसायटी डॅशबोर्ड आणि अहवाल</span><span class="en">Society dashboard & reports</span></h3>
+          <p><span class="lt" data-en="Adoption numbers, monthly consumption, demand forecasts — full detail on the big screen.">किती घरे सदस्य, महिन्याची वापर, मागणी अंदाज — मोठ्या स्क्रीनवर संपूर्ण तपशील.</span>
+            <span class="en">Adoption numbers, monthly consumption, forecasts — full detail on the big screen.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FORECAST ================= -->
+<section id="forecast" class="has-banner">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="The next generation">पुढची पिढी · Demand forecasting</span></span>
+      <h2><span class="lt" data-en="Not just records — predictions too">हिशोबापुरती नाही — अंदाजही आता</span>
+        <span class="en">Beyond records — real demand forecasting</span>
+      </h2>
+    </div>
+    <div class="sec-banner">
+      <img src="images/forecast.jpg" alt="Milk cans arranged like a bar chart with a rising arrow" loading="lazy" width="1408" height="768">
+    </div>
+    <div class="pipe">
+      <span class="chip lt" data-en="History">इतिहास</span>
+      <span class="chip"><span class="arw">→</span> <span class="lt" data-en="Subscriptions">सदस्यता</span></span>
+      <span class="chip"><span class="arw">→</span> <span class="lt" data-en="Skips">सुट्ट्या</span></span>
+      <span class="chip"><span class="arw">→</span> <span class="lt" data-en="Weekdays">आयुष्य</span></span>
+      <span class="chip"><span class="arw">→</span> <span class="lt" data-en="Weather">हवामान</span></span>
+      <span class="chip"><span class="arw">→</span> <span class="lt" data-en="Forecast">अंदाज</span></span>
+    </div>
+    <div class="forecast-box">
+      <div class="day">सोमवार · Monday · 29 Sep</div>
+      <div class="fc-row"><span><span class="lt" data-en="Confirmed orders">पक्की ऑर्डर · Confirmed</span></span><b>391 L</b></div>
+      <div class="fc-row"><span><span class="lt" data-en="Historical expected">ऐतिहासिक अपेक्षित · Historical</span></span><b>28 L</b></div>
+      <div class="fc-row"><span><span class="lt" data-en="Safety buffer">सुरक्षित रक्कम · Buffer</span></span><b>+5 L</b></div>
+      <div class="fc-result"><span class="lt" data-en="Procure: 424 L">एकूण घ्यावी: 424 L</span><small class="lt" data-en="Recommended procurement for tomorrow">Recommended procurement · उद्यासाठी शिफारस</small></div>
+    </div>
+    <p class="fc-note">
+      <span class="lt" data-en="Once a month of data is collected, the system says — <b>&ldquo;buy about this much milk tomorrow.&rdquo;</b>">महिन्याभराचा डेटा जमा झाला की, सिस्टीम सांगते — <b>“उद्या सुमारे एवढे दूध घ्या.”</b></span>
+      <span class="en">Once enough history builds up, DoodhWala tells the milkman exactly how much to procure — waste goes down, service goes up.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Pricing">भांडवल · Pricing</span></span>
+      <h2><span class="lt" data-en="Clear and low — for the milkman">दूधवाल्यासाठी — स्पष्ट आणि कमी</span>
+        <span class="en">Simple pricing that grows with your business</span>
+      </h2>
+    </div>
+    <div class="price-grid">
+      <div class="plan">
+        <h3><span class="lt" data-en="Starter">प्रारंभ</span><span class="en">Starter</span></h3>
+        <div class="price">₹499<small class="lt" data-en="/month">/महिना</small></div>
+        <div class="for"><span class="lt" data-en="Up to 100 customers — for small milkmen">१०० ग्राहकांपर्यंत — लहान दूधवाल्यासाठी</span><span class="en">Up to 100 customers</span></div>
+        <ul>
+          <li class="lt" data-en="Daily demand list">रोजची मागणी यादी</li>
+          <li class="lt" data-en="Society-wise totals">सोसायटीनिहाय आकडे</li>
+          <li class="lt" data-en="Delivery marking">डिलिव्हरी नोंद</li>
+          <li class="lt" data-en="WhatsApp notifications">WhatsApp सूचना</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost"><span class="lt" data-en="Get started">सुरू करा</span></a>
+      </div>
+      <div class="plan pop">
+        <span class="pop-tag"><span class="lt" data-en="POPULAR">लोकप्रिय · POPULAR</span></span>
+        <h3><span class="lt" data-en="Growth">प्रगती</span><span class="en">Growth</span></h3>
+        <div class="price">₹999<small class="lt" data-en="/month">/महिना</small></div>
+        <div class="for"><span class="lt" data-en="Up to 300 customers — for larger routes">३०० ग्राहकांपर्यंत — मोठ्या रूटसाठी</span><span class="en">Up to 300 customers</span></div>
+        <ul>
+          <li class="lt" data-en="Everything in Starter">स्टार्टरची सर्व सुविधा</li>
+          <li class="lt" data-en="Dues & collection tracking">बाकीदार आणि वसुली</li>
+          <li class="lt" data-en="Route-wise list">मार्ग (route) यादी</li>
+          <li class="lt" data-en="Monthly reports">महिन्याचा अहवाल</li>
+          <li class="lt" data-en="Priority support">प्राधान्य पुरावा</li>
+        </ul>
+        <a href="#join" class="btn btn-primary"><span class="lt" data-en="Get started">सुरू करा</span></a>
+      </div>
+      <div class="plan">
+        <h3><span class="lt" data-en="Business">व्यवसाय</span><span class="en">Business</span></h3>
+        <div class="price">₹3<small class="lt" data-en="/customer/month">/ग्राहक/महिना</small></div>
+        <div class="for"><span class="lt" data-en="500+ customers — when your network grows">५००+ ग्राहक — नेटवर्क मोठा झाल्यावर</span><span class="en">Pay only per active customer</span></div>
+        <ul>
+          <li class="lt" data-en="Pay for what you use">जितके ग्राहक, तितकेच भांडवल</li>
+          <li class="lt" data-en="Multiple societies">अनेक सोसायटी</li>
+          <li class="lt" data-en="Demand forecasting">मागणी अंदाज (forecast)</li>
+          <li class="lt" data-en="Personal support">वैयक्तिक सहाय्य</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost"><span class="lt" data-en="Contact us">संपर्क साधा</span></a>
+      </div>
+    </div>
+    <div class="free-note">
+      <span class="lt" data-en="🎉 Always free for residents. No charges.">🎉 रहिवासांसाठी — मोफत. कोणताही शुल्क नाही.</span>
+      <span class="en">Always free for residents — no fees, no commissions on milk.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="sec-tag"><span class="lt" data-en="Frequently asked questions">वारंवार विचारले जाणारे प्रश्न · FAQ</span></span>
+      <h2><span class="lt" data-en="Questions, answered">मनातले प्रश्न?</span><span class="en">Questions, answered</span></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary><span class="sum-t"><span class="lt" data-en="Do residents pay anything?">रहिवासांना पैसे द्यायचे लागतात का?</span><span class="en">Do residents pay anything?</span></span></summary>
+        <div class="ans"><span class="lt" data-en="No. DoodhWala is free for residents. Only the milkman or society pays for the software.">नाही. DoodhWala रहिवासांसाठी मोफत आहे. फक्त दूधवाला किंवा सोसायटी सॉफ्टवेअर शुल्क भरतात.</span>
+          <span class="en">No. The platform is free for residents. Only the milkman or society pays for the software.</span>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="sum-t"><span class="lt" data-en="Do I need to install an app?">नवीन अ‍ॅप डाउनलोड करावा लागेल का?</span><span class="en">Do I need to install an app?</span></span></summary>
+        <div class="ans"><span class="lt" data-en="Not to start. It runs on WhatsApp first — a message in the evening, reply with one digit and done. A mobile app comes later for those who want it.">नाही. सुरुवातीला WhatsApp वरच — रात्री मेसेज येईल, एक अंक लिहिला की झालं. नंतर इच्छा असल्यास मोबाइल अ‍ॅपही मिळेल.</span>
+          <span class="en">Not to start. It runs on WhatsApp first — reply with one digit. A mobile app comes later for those who want it.</span>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="sum-t"><span class="lt" data-en="Can I change after 10 PM?">रात्री १० नंतर बदल करता येतो का?</span><span class="en">Can I change after 10 PM?</span></span></summary>
+        <div class="ans"><span class="lt" data-en="Normally no — the milkman has started preparations. For emergencies, the milkman can approve an exception manually.">सामान्यतः नाही — दूधवाला तयारी सुरू करतो. अत्यावश्यक बदल असल्यास दूधवाला स्वतः अपवाद म्हणून स्वीकारू शकतो.</span>
+          <span class="en">Normally no — procurement starts after cutoff. For emergencies, the milkman can approve an exception manually.</span>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="sum-t"><span class="lt" data-en="Does it work in villages or with few customers?">छोट्या गावात / कमी ग्राहकांसहही चालेल का?</span><span class="en">Does it work in villages or with few customers?</span></span></summary>
+        <div class="ans"><span class="lt" data-en="Yes. Start with as few as 10 customers — the platform gets more useful as you grow, and the forecast gets sharper.">होय. १० ग्राहकांपासूनही सुरू करता येते. ग्राहक वाढताच प्लॅटफॉर्मची उपयोगिता वाढते — मागणी अंदाज तितका अचूक होतो.</span>
+          <span class="en">Yes. Start with as few as 10 customers — it gets more valuable as you grow.</span>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span class="sum-t"><span class="lt" data-en="How do payments work?">पेमेंट कसे होते?</span><span class="en">How do payments work?</span></span></summary>
+        <div class="ans"><span class="lt" data-en="V1 stays simple: monthly prepay or daily collection. UPI and autopay come next.">वी १ मध्ये सोपे — महिन्याची आधीच भरपाई, किंवा रोजची वसुली. नंतर UPI आणि ऑटोपे सुविधा येतील.</span>
+          <span class="en">V1 stays simple: monthly prepay or daily collection. UPI and autopay come next.</span>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section id="join">
+  <div class="wrap">
+    <div class="final-cta">
+      <span style="font-size:2.2rem;display:inline-block;margin-bottom:10px;position:relative">🥛</span>
+      <h2><span class="lt" data-en="Start today. Wake up tomorrow with the list already made.">आजच सुरू करा — उद्याची यादी तयार</span>
+        <span class="en">Start today. Wake up tomorrow with the list already made.</span>
+      </h2>
+      <p><span class="lt" data-en="Leave your number — we'll onboard you the simple way, step by step.">मोबाइल क्रमांक द्या — आम्ही प्रथम सोप्या पद्धतीने सुरुवात करून देखू.</span>
+        <span class="en">Leave your number — we'll onboard you the simple way, step by step.</span>
+      </p>
+      <form class="signup" id="signupForm" onsubmit="return signupDone(event)">
+        <input type="tel" id="mobileInput" placeholder="मोबाइल क्रमांक / Mobile number" maxlength="13" required aria-label="Mobile number">
+        <button type="submit" class="btn btn-saffron"><span class="lt" data-en="Tell me →">मला सांगा →</span></button>
+      </form>
+      <div class="signup-ok" id="signupOk" style="display:none"></div>
+      <div class="cta-sub"><span class="lt" data-en="No credit card needed · Always free for residents">कोणताही क्रेडिट कार्ड नाही · रहिवासांसाठी मोफत · No credit card needed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo" style="color:#fff">
+          <span class="mark" style="background:var(--saffron)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 2h8v3l2 3v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8l2-3V2z" fill="#fff"/><circle cx="12" cy="15" r="2.4" fill="#EF7C1A"/></svg>
+          </span>
+          <span style="color:#fff">DoodhWala<small style="color:#9DBBAE"><span class="lt" data-en="Milk subscription platform">दूधवाला • सदस्यता प्लॅटफॉर्म</span></small></span>
+        </div>
+        <p><span class="lt" data-en="Subscription infrastructure for local milk delivery.">स्थानिक दूधवाल्यांसाठी सदस्यता आणि मागणी व्यवस्थापन प्रणाली.</span>
+          <span class="en" style="color:#7E9B8E">Subscription infrastructure for local milk delivery.</span>
+        </p>
+      </div>
+      <div>
+        <h6 class="lt" data-en="Product">उत्पादन</h6>
+        <a href="#how"><span class="lt" data-en="How it works">कसे चालते</span></a>
+        <a href="#demo"><span class="lt" data-en="Live demo">लाइव्ह डेमो</span></a>
+        <a href="#vacation"><span class="lt" data-en="Vacation mode">सुट्टी मोड</span></a>
+        <a href="#whatsapp">WhatsApp</a>
+      </div>
+      <div>
+        <h6 class="lt" data-en="For">साठी</h6>
+        <a href="#who"><span class="lt" data-en="Residents">रहिवासी</span></a>
+        <a href="#milkman"><span class="lt" data-en="Milkmen">दूधवाला</span></a>
+        <a href="#who"><span class="lt" data-en="Societies">सोसायटी</span></a>
+        <a href="#pricing"><span class="lt" data-en="Pricing">भांडवल</span></a>
+      </div>
+      <div>
+        <h6 class="lt" data-en="Contact">संपर्क</h6>
+        <a href="#join">+91 98XXX XXXXX</a>
+        <a href="#join">hello@doodhwala.in</a>
+        <a href="#faq"><span class="lt" data-en="FAQ">प्रश्न</span></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span><span class="lt" data-en="© 2026 DoodhWala · All rights reserved">© 2026 DoodhWala · सर्व हक्क राखीव</span></span>
+      <span class="made">Made in Maharashtra 🇮🇳</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING NOTIFICATION WIDGET ================= -->
+<div class="notif-widget" id="notifWidget">
+  <div class="notif-panel phone-card" id="notifPanel" role="dialog" aria-label="Tomorrow's milk notification">
+    <div class="phone-head">
+      <span class="dot">🥛</span>
+      <div>
+        <b><span class="lt" data-en="Tomorrow's milk — 1 litre">कालचे दूध — 1 लिटर</span></b>
+        <span><span class="lt" data-en="DoodhWala · Today, 8:00 PM">DoodhWala · आज, रात्री ८:००</span></span>
+      </div>
+      <button class="notif-close" id="notifClose" aria-label="Close notification">✕</button>
+    </div>
+    <div class="milk-big" id="heroQty">1 <small><span class="lt" data-en="litre · cow">लिटर · गाय</span></small></div>
+    <div class="opt-row">
+      <button class="opt active lt" data-hero="1" data-en="✓ Keep 1 litre">✓ 1 लिटर ठेवा</button>
+      <button class="opt lt" data-hero="0.5" data-en="500 ml">500 मि.लि.</button>
+      <button class="opt lt" data-hero="1.5" data-en="1.5 litres">1.5 लिटर</button>
+      <button class="opt lt" data-hero="2" data-en="2 litres">2 लिटर</button>
+      <button class="opt skip lt" data-hero="skip" data-en="Skip tomorrow (काल नको)">काल नको (Skip tomorrow)</button>
+    </div>
+    <div class="status-line" id="heroStatus">काहीच न केल्यातर 1 लिटर आपोआप पक्की ✓</div>
+    <div class="cutoff-note">⏰ <span class="lt" data-en="Changes close at 10:00 PM">बदल करण्याची वेळ: रात्री १०:००</span></div>
+  </div>
+  <button class="notif-label" id="notifLabel"><span aria-hidden="true">🥛</span><span class="lt" data-en="Tomorrow's milk">कालचे दूध</span></button>
+  <button class="notif-bubble" id="notifBubble" aria-expanded="false" aria-controls="notifPanel" aria-label="Open tomorrow's milk notification">🥛</button>
+</div>
+
+<script>
+/* ================= LANGUAGE ================= */
+var LANG = 'mr';
+function T(mr, en){ return LANG === 'en' ? en : mr; }
+
+function setLang(lang){
+  LANG = lang;
+  document.documentElement.lang = (lang === 'en') ? 'en' : 'mr';
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.querySelectorAll('.lt').forEach(function(el){
+    var en = el.getAttribute('data-en');
+    if(!en) return;
+    if(lang === 'en'){
+      if(el.dataset.mrHtml === undefined){ el.dataset.mrHtml = el.innerHTML; }
+      el.innerHTML = en;
+    } else if(el.dataset.mrHtml !== undefined){
+      el.innerHTML = el.dataset.mrHtml;
+    }
+  });
+  var lbl = document.querySelector('#langBtn .lang-label');
+  if(lbl) lbl.textContent = (lang === 'mr') ? 'EN' : 'मरा';
+  renderHero();
+  renderDemo();
+  updateSignupMsg();
+}
+
+document.getElementById('langBtn').addEventListener('click', function(){
+  setLang(LANG === 'mr' ? 'en' : 'mr');
+});
+
+/* ================= HERO QUICK OPTIONS ================= */
+var heroChoice = '1';
+function heroStatusText(){
+  if(heroChoice === 'skip') return T('काल दूध थांबविले — 0 लिटर (skipped)', 'Skipped tomorrow — 0 litres');
+  if(heroChoice === '1')    return T('काहीच न केल्यातर 1 लिटर आपोआप पक्की ✓', 'Do nothing — 1 litre confirms automatically ✓');
+  return T('निवडले: ' + heroChoice + ' लिटर — काल त्याप्रमाणे येईल ✓', 'Selected: ' + heroChoice + ' litres — tomorrow adjusted ✓');
+}
+function renderHero(){
+  var status = document.getElementById('heroStatus');
+  if(!status) return;
+  status.textContent = heroStatusText();
+  status.classList.toggle('skip-mode', heroChoice === 'skip');
+  var q = document.getElementById('heroQty');
+  if(q){
+    if(heroChoice === 'skip'){
+      q.innerHTML = '0 <small>' + T('लिटर · सुट्टी', 'litres · skipped') + '</small>';
+    } else {
+      q.innerHTML = heroChoice + ' <small>' + T('लिटर · गाय', 'litre · cow') + '</small>';
+    }
+  }
+  document.querySelectorAll('[data-hero]').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-hero') === heroChoice);
+  });
+}
+document.querySelectorAll('[data-hero]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    heroChoice = btn.getAttribute('data-hero');
+    renderHero();
+  });
+});
+
+/* ================= INTERACTIVE DEMO ================= */
+var base = {'0.5':64, '1':143, '1.5':18, '2':21};
+var baseSkip = 45;
+var demoCurrent = '1';
+var demoOriginal = '1';
+var demoTouched = false;
+
+function countFor(q){
+  var n = base[q];
+  if(demoOriginal === q) n -= 1;
+  if(demoCurrent  === q) n += 1;
+  return n;
+}
+
+function renderDemo(){
+  document.querySelectorAll('#demandBody [data-homes]').forEach(function(td){
+    var q = td.getAttribute('data-homes');
+    var homes = countFor(q);
+    td.textContent = homes;
+    var lc = document.querySelector('#demandBody [data-litres="' + q + '"]');
+    if(lc) lc.textContent = (homes * parseFloat(q)).toFixed(1) + ' L';
+  });
+
+  var totalHomes = 0, totalL = 0;
+  Object.keys(base).forEach(function(q){
+    var h = countFor(q);
+    totalHomes += h;
+    totalL += h * parseFloat(q);
+  });
+  var skipTotal = baseSkip + (demoCurrent === 'skip' ? 1 : 0);
+
+  document.getElementById('totalHomes').textContent = totalHomes;
+  document.getElementById('totalL').textContent = totalL.toFixed(1) + ' L';
+  document.getElementById('skipHomes').textContent = skipTotal;
+
+  var heroTotal = document.getElementById('heroTotal');
+  var heroSkip  = document.getElementById('heroSkip');
+  if(heroTotal) heroTotal.textContent = totalL.toFixed(0) + ' L';
+  if(heroSkip)  heroSkip.textContent  = skipTotal + T(' घरे', ' homes');
+
+  /* resident status */
+  var status = document.getElementById('demoStatus');
+  var qty = document.getElementById('demoQty');
+  if(demoCurrent === 'skip'){
+    status.textContent = T('काल सुट्टी — 0 लिटर (skipped tomorrow)', 'Skipped tomorrow — 0 litres');
+    status.classList.add('skip-mode');
+    if(qty) qty.innerHTML = '0 <small>' + T('लिटर · सुट्टी', 'litres · skipped') + '</small>';
+  } else {
+    status.classList.remove('skip-mode');
+    if(demoCurrent === demoOriginal){
+      status.textContent = T('काहीच न केल्यातर — 1 लिटर आपोआप पक्की ✓', 'Do nothing — 1 litre confirms automatically ✓');
+    } else {
+      status.textContent = T('बदलले: ' + demoCurrent + ' लिटर — दूधवाल्याची यादी अपडेट झाली ✓',
+                             'Changed: ' + demoCurrent + ' litres — milkman\'s list updated ✓');
+    }
+    if(qty) qty.innerHTML = demoCurrent + ' <small>' + T('लिटर · गाय दूध', 'litres · cow milk') + '</small>';
+  }
+
+  document.querySelectorAll('#demoOpts .opt').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-q') === demoCurrent);
+  });
+
+  var hint = document.getElementById('demoHint');
+  if(hint){
+    hint.textContent = demoTouched
+      ? T('✅ दूधवाल्याची यादी अपडेट झाली — पुन्हा निवडून पाहा', '✅ Milkman list updated — try another option')
+      : T('👆 डावीकडे बदल करा — यादी लगेच अपडेट होईल', '👆 Change anything on the left — the list updates instantly');
+  }
+}
+
+document.querySelectorAll('#demoOpts .opt').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    demoCurrent = btn.getAttribute('data-q');
+    demoTouched = true;
+    renderDemo();
+  });
+});
+
+/* ================= NOTIFICATION WIDGET (bottom-left) ================= */
+(function(){
+  var widget  = document.getElementById('notifWidget');
+  var bubble  = document.getElementById('notifBubble');
+  var label   = document.getElementById('notifLabel');
+  var touched = false;
+
+  function setWidget(open){
+    widget.classList.toggle('open', open);
+    bubble.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function toggle(){ touched = true; setWidget(!widget.classList.contains('open')); }
+
+  bubble.addEventListener('click', toggle);
+  label.addEventListener('click', toggle);
+  document.getElementById('notifClose').addEventListener('click', function(){
+    touched = true; setWidget(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') setWidget(false);
+  });
+  document.addEventListener('click', function(e){
+    if(!widget.contains(e.target)) setWidget(false);
+  });
+
+  /* auto-open once after 2.6s — like a real evening push notification */
+  setTimeout(function(){
+    if(!touched && !widget.classList.contains('open')) setWidget(true);
+  }, 2600);
+})();
+
+/* ================= SIGNUP ================= */
+function signupMsg(){
+  return T('✅ धन्यवाद! लवकरच आम्ही तुमच्या WhatsApp वर संपर्क साधू — thank you!',
+           '✅ Thank you! We will reach you on WhatsApp very soon.');
+}
+function updateSignupMsg(){
+  document.getElementById('signupOk').textContent = signupMsg();
+}
+function signupDone(e){
+  e.preventDefault();
+  var v = document.getElementById('mobileInput').value.trim();
+  if(v.length < 10) return false;
+  document.getElementById('signupForm').style.display = 'none';
+  updateSignupMsg();
+  document.getElementById('signupOk').style.display = 'block';
+  return false;
+}
+
+/* init */
+renderHero();
+renderDemo();
+</script>
+</body>
+</html>
